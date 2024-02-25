@@ -1,0 +1,14 @@
+# Start notification daemon
+dunst &
+
+# Start clipboard manager
+clipcatd &
+
+# Map keyboard shortcuts
+sxhkd &
+
+# Bind Super key to menu
+xcape -e 'Super_L=Alt_L|F1' &
+
+# Start colour temperature adjustment
+redshift &
