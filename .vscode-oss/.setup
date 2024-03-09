@@ -1,0 +1,29 @@
+#!/bin/sh
+
+CODE_CMD="codium"
+
+# Save directory of script
+scriptDir="$(dirname "$0")"
+
+# Make directory for Github and gists
+mkdir -p "$HOME/Github/gist"
+
+# Clone gist to install vscodium extensions from github
+vsixScript="$HOME/Github/gist/vsix-install/vsix-install.sh"
+git clone https://gist.github.com/a8338ed17537e347b3aa9b34d101f1d7.git "$(dirname "$vsixScript")"
+
+# Make script executable
+chmod +x "$vsixScript"
+
+# Install vscodium extensions from github repositories
+$vsixScript gitkraken/vscode-gitlens
+$vsixScript prettier/prettier-vscode
+$vsixScript foxundermoon/vs-shell-format
+$vsixScript PKief/vscode-material-icon-theme
+
+# Install extensions from file
+if [ -f "$scriptDir/.extensions" ]; then
+    while IFS= read -r extension; do
+        $CODE_CMD --install-extension "$extension"
+    done < "$scriptDir/.extensions"
+fi
