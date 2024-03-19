@@ -1,10 +1,11 @@
 #!/bin/sh
 
-# Get volume value
-volume="$(pactl get-sink-volume 0 | grep ^Volume | awk '{print $5}' | sed -e 's/%//')"
+# Get volume percent
+volume="$(pactl get-sink-volume 0 | grep ^Volume | awk '{print $5}' | tr -d %)"
 # Get if volume is muted
 mute="$([ "$(pactl get-sink-mute 0 | awk '{print $2}')" = "yes" ] && printf " (muted)")"
 
+#Set notification icon
 if [ -n "$mute" ]; then
     icon="audio-volume-muted-symbolic"
 else
@@ -20,4 +21,4 @@ else
 fi
 
 # Send notification
-notify-send "Volume: ${volume}%${mute}" -h int:value:"${volume}" -i "${icon}" -r 1000 -t 2000 -u normal
+notify-send "Volume: ${volume}%${mute}" -h int:value:"${volume}" -i "${icon}" -r 10002 -t 2000 -u normal

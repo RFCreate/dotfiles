@@ -22,11 +22,19 @@ ctrl + shift + Print
 ctrl + alt + Print
     maimpick "(Copy) Screen"
 
-# Raise the volume
+# Raise brightness
+XF86MonBrightnessUp
+    brightnessctl -q set +5%; brightness-notify
+
+# Lower brightness
+XF86MonBrightnessDown
+    brightnessctl -q set 5%-; brightness-notify
+
+# Raise volume
 XF86AudioRaiseVolume
     pactl set-sink-volume 0 +5%; volume-notify
 
-# Lower the volume
+# Lower volume
 XF86AudioLowerVolume
     pactl set-sink-volume 0 -5%; volume-notify
 
