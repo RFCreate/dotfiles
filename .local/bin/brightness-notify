@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Get brightness percent
-brightness="$(brightnessctl | grep '%' | awk '{print $4}' | tr -d %\(\))"
+brightness="$(brightnessctl | grep -o '[0-9]*%' | tr -d %)"
 #Set notification icon
 icon="display-brightness-symbolic"
 
