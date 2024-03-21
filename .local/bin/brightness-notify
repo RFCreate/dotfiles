@@ -3,7 +3,7 @@
 # Get brightness percent
 brightness="$(brightnessctl | grep -o '[0-9]*%' | tr -d %)"
 #Set notification icon
-icon="display-brightness-symbolic"
+icon="display-brightness"
 
 # Send notification
 notify-send "Brightness: ${brightness}%" -h int:value:"${brightness}" -i "${icon}" -r 10001 -t 2000 -u normal

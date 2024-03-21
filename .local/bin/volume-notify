@@ -7,16 +7,14 @@ mute="$([ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ] &
 
 #Set notification icon
 if [ -n "$mute" ]; then
-    icon="audio-volume-muted-symbolic"
+    icon="audio-volume-muted"
 else
     if [ "$volume" -le 30 ]; then
-        icon="audio-volume-low-symbolic"
+        icon="audio-volume-low"
     elif [ "$volume" -le 60 ]; then
-        icon="audio-volume-medium-symbolic"
-    elif [ "$volume" -le 100 ]; then
-        icon="audio-volume-high-symbolic"
+        icon="audio-volume-medium"
     else
-        icon="audio-volume-overamplified-symbolic"
+        icon="audio-volume-high"
     fi
 fi
 

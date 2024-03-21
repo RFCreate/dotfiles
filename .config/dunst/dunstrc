@@ -1,9 +1,9 @@
 [global]
-    font = Monospace 9
+    font = Monospace 10
 
     ### Icons ###
     enable_recursive_icon_lookup = true
-    icon_theme = Adwaita
+    icon_theme = HighContrast
     icon_position = left
 
 [urgency_low]

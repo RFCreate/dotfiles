@@ -1,7 +1,7 @@
 # Start screenlocker and lock after 5 minutes
 xset s on
 xset s 300
-xss-lock --transfer-sleep-lock -- i3lock --nofork &
+xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 
 # Start notification daemon
 dunst &
