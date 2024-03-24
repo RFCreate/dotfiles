@@ -20,10 +20,10 @@ send_notification()
 {
     case "$prompt" in
         "(Copy)"*)
-            notify-send "Screenshot" "Copy to clipboard" -i edit-paste-symbolic -t 5000 -u normal
+            notify-send "Screenshot" "Copy to clipboard" -i edit-paste -t 5000 -u normal
             ;;
         *)
-            notify-send "Screenshot" "Saved to $file" -i folder-pictures-symbolic -t 5000 -u normal
+            notify-send "Screenshot" "Saved to $file" -i folder-pictures -t 5000 -u normal
             ;;
     esac
 }
