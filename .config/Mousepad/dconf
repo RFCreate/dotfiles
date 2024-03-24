@@ -1,0 +1,21 @@
+[file]
+add-last-end-of-line=true
+
+[view]
+auto-indent=true
+color-scheme='oblivion'
+font-name='Monospace 16'
+highlight-current-line=true
+insert-spaces=true
+match-braces=true
+show-line-numbers=true
+show-whitespace=true
+smart-backspace=true
+smart-home-end='before'
+tab-width=uint32 4
+use-default-monospace-font=false
+
+[window]
+cycle-tabs=true
+remember-position=true
+statusbar-visible=true
