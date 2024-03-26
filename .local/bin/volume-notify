@@ -6,7 +6,7 @@ volume="$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -n 1 |
 mute="$([ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ] && printf " (muted)")"
 
 #Set notification icon
-if [ -n "$mute" ] || [ "$volume" -eq 0 ]; then
+if [ -n "$mute" ]; then
     icon="audio-volume-muted"
 else
     if [ "$volume" -le 30 ]; then
@@ -19,4 +19,4 @@ else
 fi
 
 # Send notification
-notify-send "Volume: ${volume}%${mute}" -h int:value:"${volume}" -i "${icon}" -r 10002 -t 2000 -u normal
+notify-send "Volume: ${volume}%${mute}" -h int:value:"${volume}" -i "${icon}" -r 10003 -t 2000 -u normal

@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # Get brightness percent
-brightness="$(brightnessctl | grep -o '[0-9]*%' | tr -d %)"
+brightness="$(brightnessctl | grep -o '[0-9]*%')"
 #Set notification icon
 icon="display-brightness"
 
 # Send notification
-notify-send "Brightness: ${brightness}%" -h int:value:"${brightness}" -i "${icon}" -r 10001 -t 2000 -u normal
+notify-send "Brightness: ${brightness}" -h int:value:"${brightness}" -i "${icon}" -r 10002 -t 2000 -u normal

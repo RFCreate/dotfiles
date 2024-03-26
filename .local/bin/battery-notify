@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Set battery levels
+FULL_LEVEL=100
+WARNING_LEVEL=25
+CRITICAL_LEVEL=10
+
+# Set files to save battery
+battery_file=/tmp/battery-state
+charging_file=/tmp/battery-charging
+
+# Get battery percent
+battery="$(acpi -b | grep -o '[0-9]*%' | tr -d %)"
+# Get charging state
+charging="$(acpi -b | awk '{print $3}' | tr -d ,)"
+
+# Set icon name based on battery percent
+# And set notification urgency level
+if [ "$battery" -eq "$FULL_LEVEL" ]; then
+    icon="battery-full"
+    urgency="low"
+elif [ "$battery" -gt "$WARNING_LEVEL" ]; then
+    icon="battery-good"
+    urgency="normal"
+elif [ "$battery" -gt "$CRITICAL_LEVEL" ]; then
+    icon="battery-low"
+    urgency="critical"
+else
+    icon="battery-caution"
+    urgency="critical"
+fi
+
+# Change icon name and urgency if battery is charging
+[ "$charging" = "Charging" ] && icon="${icon}-charging" && urgency="normal"
+
+# Check if charging state has change
+if [ ! -f "$charging_file" ] || [ "$(cat "$charging_file")" != "$charging" ]; then
+    notify-send "$charging battery: ${battery}%" -i "${icon}" -r 10001 -u "${urgency}"
+    echo "$charging" > "$charging_file"
+fi
+
+# Do nothing if battery continues charging
+[ "$charging" = "Charging" ] && exit
+
+# Check if battery state has change
+if [ ! -f "$battery_file" ] || [ "$(cat "$battery_file")" != "$icon" ]; then
+    notify-send "$charging battery: ${battery}%" -i "${icon}" -r 10001 -u "${urgency}"
+    echo "$icon" > "$battery_file"
+fi
