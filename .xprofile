@@ -7,13 +7,20 @@ xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 dunst &
 
 # Start clipboard manager
-clipcatd &
+clipcatd -r &
 
 # Map keyboard shortcuts
 sxhkd &
 
 # Bind Super key to menu
 xcape -e 'Super_L=Alt_L|F1' &
+
+# Kill any running instance of polybar
+polybar-msg cmd quit
+# Start polybar after window manager
+(sleep 5 && polybar main 2>&1 | tee -a /tmp/polybar.log ) & disown
+# Workaround to hide polybar in fullscreen
+(sleep 6 && xdo hide -n polybar && xdo show -n polybar) &
 
 # Start colour temperature adjustment
 redshift &
