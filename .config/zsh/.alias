@@ -24,12 +24,10 @@ alias ~='cd ~'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
 
-# Use (dirs -v) to change directory
+# Short change directory
 export DIRSTACKSIZE=10
-alias 0='cd -0'
+alias 0='dirs -v'
 alias 1='cd -1'
 alias 2='cd -2'
 alias 3='cd -3'

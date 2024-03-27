@@ -6,7 +6,7 @@
   <property name="last-window-maximized" type="bool" value="true"/>
   <property name="last-show-hidden" type="bool" value="true"/>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_100_PERCENT"/>
-  <property name="last-details-view-column-widths" type="string" value="187,50,158,158,50,154,50,50,604,50,50,77,50,159"/>
+  <property name="last-details-view-column-widths" type="string" value="158,50,158,158,50,154,50,50,604,50,50,77,50,188"/>
   <property name="misc-single-click" type="bool" value="false"/>
   <property name="misc-volume-management" type="bool" value="false"/>
   <property name="misc-date-style" type="string" value="THUNAR_DATE_STYLE_YYYYMMDD"/>

@@ -35,8 +35,7 @@ fi
 
 # Check if charging state has change
 if [ ! -f "$charging_file" ] || [ "$(cat "$charging_file")" != "$charging" ]; then
-    notify-send "$charging battery: ${battery}%" -i "${icon}" -r 10001 -u "${urgency}"
-    echo "$charging" > "$charging_file"
+    notify-send "$charging battery: ${battery}%" -i "${icon}" -r 10001 -u "${urgency}" && echo "$charging" > "$charging_file"
 fi
 
 # Do nothing if battery continues charging
@@ -44,6 +43,5 @@ fi
 
 # Check if battery state has change
 if [ ! -f "$battery_file" ] || [ "$(cat "$battery_file")" != "$icon" ]; then
-    notify-send "$charging battery: ${battery}%" -i "${icon}" -r 10001 -u "${urgency}"
-    echo "$icon" > "$battery_file"
+    notify-send "$charging battery: ${battery}%" -i "${icon}" -r 10001 -u "${urgency}" && echo "$icon" > "$battery_file"
 fi

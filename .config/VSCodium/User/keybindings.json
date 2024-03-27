@@ -99,5 +99,9 @@
         "key": "alt+d",
         "command": "addCursorsAtSearchResults",
         "when": "fileMatchOrMatchFocus && searchViewletVisible"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quit"
     }
 ]

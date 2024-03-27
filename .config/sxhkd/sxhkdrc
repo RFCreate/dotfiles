@@ -57,3 +57,15 @@ super + r
 # Open clipboard history
 super + v
     clipcat-menu
+
+# Open file manager
+super + e
+    thunar
+
+# Open terminal
+super + t
+    xfce4-terminal
+
+# Open task manager
+ctrl + shift + Escape
+    xfce4-taskmanager
