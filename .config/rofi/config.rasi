@@ -14,5 +14,5 @@ configuration {
   icon-theme: "hicolor";
   sort: false;
   sorting-method: "fzf";
-  kb-cancel: "Escape,Alt+F1,Super_L+v,Super_L+V,Super_L+w,Super_L+W,Super_L+r,Super_L+R";
+  kb-cancel: "Escape,Super_L+m,Super_L+M,Super_L+v,Super_L+V,Super_L+w,Super_L+W,Super_L+r,Super_L+R";
 }

@@ -12,9 +12,6 @@ clipcatd -r &
 # Map keyboard shortcuts
 sxhkd &
 
-# Bind Super key to menu
-xcape -e 'Super_L=Alt_L|F1' &
-
 # Kill any running instance of polybar
 polybar-msg cmd quit
 # Start polybar after window manager
