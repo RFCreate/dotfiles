@@ -42,8 +42,8 @@ XF86AudioLowerVolume
 XF86AudioMute
     pactl set-sink-mute 0 toggle; volume-notify
 
-# Open program launcher with super key using xcape
-super + m
+# Open program launcher
+super + q
     rofi -show drun
 
 # Open window switcher
