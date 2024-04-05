@@ -64,8 +64,8 @@ super + e
 
 # Open terminal
 super + t
-    xfce4-terminal
+    lxterminal
 
 # Open task manager
 ctrl + shift + Escape
-    xfce4-taskmanager
+    lxtask

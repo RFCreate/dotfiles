@@ -3,9 +3,6 @@
 # Save directory of script
 scriptDir="$(dirname "$0")"
 
-# Get mousepad settings
-dconf dump /org/xfce/mousepad/preferences/ > "$HOME/.config/Mousepad/dconf"
-
 # Copy all files from $HOME to this repo
 # shellcheck disable=SC2016
 find "$scriptDir" -type f -not -path "./.git/*" -not -path ./pull.sh -not -path ./push.sh \
