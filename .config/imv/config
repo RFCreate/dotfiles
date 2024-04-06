@@ -1,0 +1,7 @@
+[options]
+background=151515
+
+[binds]
+<Escape> = quit
+<plus> = zoom 1
+0 = reset

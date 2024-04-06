@@ -5,5 +5,5 @@ GenericName=Maimpick
 Comment=Screenshot picker
 Exec=maimpick
 Icon=applets-screenshooter
-Categories=Utility;Development
+Categories=Utility
 Terminal=false
