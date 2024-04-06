@@ -60,7 +60,7 @@ super + v
 
 # Open file manager
 super + e
-    thunar
+    pcmanfm
 
 # Open terminal
 super + t
