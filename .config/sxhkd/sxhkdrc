@@ -52,7 +52,7 @@ super + w
 
 # Open command launcher
 super + r
-    rofi -show run -no-show-icons
+    rofi -show run
 
 # Open clipboard history
 super + v
