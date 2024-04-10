@@ -1,5 +1,10 @@
 {
     "Alt-/": "lua:comment.comment",
+    "Ctrl-l": "SelectLine",
     "CtrlDelete": "DeleteWordRight",
+    "CtrlShiftDown": "SpawnMultiCursorDown",
+    "CtrlShiftEnd": "SelectToEnd",
+    "CtrlShiftHome": "SelectToStart",
+    "CtrlShiftUp": "SpawnMultiCursorUp",
     "CtrlUnderscore": "lua:comment.comment"
 }

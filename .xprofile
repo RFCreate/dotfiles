@@ -10,21 +10,19 @@ xset s on
 xset s 300
 xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 
+# Map keyboard shortcuts
+(sleep 1 && sxhkd) &
+
 # Start notification daemon
-dunst &
+(sleep 1 && dunst) &
 
 # Start clipboard manager
-clipcatd -r &
-
-# Map keyboard shortcuts
-sxhkd &
-
-# Kill any running instance of polybar
-(sleep 3 && polybar-msg cmd quit ) &
-# Start polybar after window manager
-(sleep 4 && polybar main 2>&1 | tee -a /tmp/polybar.log ) & disown
-# Workaround to hide polybar in fullscreen
-(sleep 6 && xdo hide -n polybar && xdo show -n polybar) &
+(sleep 1 && clipcatd) &
 
 # Start colour temperature adjustment
-redshift &
+(sleep 1 && redshift) &
+
+# Start polybar after window manager
+(sleep 4 && polybar main 2>&1 | tee -a /tmp/polybar.log) & disown
+# Workaround to hide polybar in fullscreen
+(sleep 6 && xdo hide -n polybar && xdo show -n polybar) &

@@ -53,5 +53,9 @@ source_script "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
 # Source powerlevel10k config file
 source_script "$ZDOTDIR/.p10k.zsh"
 
+# Load fzf CTRL-R history search
+FZF_DEFAULT_OPTS='--height 100% --layout=default --border'
+FZF_CTRL_T_COMMAND= FZF_ALT_C_COMMAND= source_script /usr/share/fzf/key-bindings.zsh
+
 # Remove source function
 unset -f source_script

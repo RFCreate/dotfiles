@@ -22,5 +22,6 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.suggest.insertMode": "replace",
     "workbench.startupEditor": "none",
+    "editor.multiCursorModifier": "ctrlCmd",
     "window.zoomLevel": 1
 }

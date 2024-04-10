@@ -86,21 +86,6 @@
         "command": "saveAll"
     },
     {
-        "key": "alt+d",
-        "command": "selectAllSearchEditorMatches",
-        "when": "inSearchEditor"
-    },
-    {
-        "key": "alt+d",
-        "command": "editor.action.selectHighlights",
-        "when": "editorFocus"
-    },
-    {
-        "key": "alt+d",
-        "command": "addCursorsAtSearchResults",
-        "when": "fileMatchOrMatchFocus && searchViewletVisible"
-    },
-    {
         "key": "ctrl+q",
         "command": "-workbench.action.quit"
     }
