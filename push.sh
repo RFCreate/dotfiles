@@ -13,6 +13,3 @@ cp -bur --suffix=".bak" "${scriptDir}"/!(pull.sh|push.sh|.git) "$HOME"
 
 # Replace bookmarks path, to make it relative to user
 sed -i "s|\$HOME|${HOME}|" "$HOME/.config/gtk-3.0/bookmarks"
-
-# Add cron job for battery notifications
-echo "* * * * * DISPLAY=${DISPLAY:-:0} DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/${UID}/bus} ${HOME}/.local/bin/battery-notify" | crontab - > /dev/null

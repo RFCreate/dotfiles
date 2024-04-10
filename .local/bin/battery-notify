@@ -1,47 +1,26 @@
 #!/bin/sh
 
-# Set battery levels
-FULL_LEVEL=100
-WARNING_LEVEL=25
-CRITICAL_LEVEL=10
+# Save arguments
+battery_name="$1"
+icon_suffix="$2"
 
-# Set files to save battery
-capacity_file=/tmp/battery-capacity
-status_file=/tmp/battery-status
+# Exit if battery name does not exists
+[ ! -d "/sys/class/power_supply/$battery_name" ] && echo "Battery '$battery_name' does not exists" && exit 1
 
-# Get battery capacity of first ocurance
-capacity="$(cat /sys/class/power_supply/BAT?/capacity | head -n 1)"
-# Get charging state of first ocurance
-status="$(cat /sys/class/power_supply/BAT?/status | head -n 1)"
+# Get battery capacity
+capacity="$(cat "/sys/class/power_supply/$battery_name/capacity")"
+# Get charging status
+status="$(cat "/sys/class/power_supply/$battery_name/status")"
 
-# Set icon name based on battery capacity
-# And set notification urgency level
-if [ "$capacity" -eq "$FULL_LEVEL" ]; then
-    icon="battery-full"
-    urgency="low"
-elif [ "$capacity" -gt "$WARNING_LEVEL" ]; then
-    icon="battery-good"
-    urgency="normal"
-elif [ "$capacity" -gt "$CRITICAL_LEVEL" ]; then
-    icon="battery-low"
-    urgency="critical"
-else
-    icon="battery-caution"
-    urgency="critical"
-fi
+# Define urgency level
+case "$icon_suffix" in
+    "full-charged")  urgency="low" ;;
+    "full-charging") urgency="normal" ;;
+    "good")          urgency="normal" ;;
+    "low")           urgency="critical" ;;
+    "caution")       urgency="critical" ;;
+    *)               exit 1 ;;
+esac
 
-# Change icon name and urgency if battery is charging
-[ "$status" = "Charging" ] && icon="${icon}-charging" && urgency="normal"
-
-# Check if charging state has change
-if [ ! -f "$status_file" ] || [ "$(cat "$status_file")" != "$status" ]; then
-    notify-send "$status battery: ${capacity}%" -i "${icon}" -r 10001 -u "${urgency}" && echo "$status" > "$status_file"
-fi
-
-# Do nothing if battery continues charging
-[ "$status" = "Charging" ] && exit
-
-# Check if battery state has change
-if [ ! -f "$capacity_file" ] || [ "$(cat "$capacity_file")" != "$icon" ]; then
-    notify-send "$status battery: ${capacity}%" -i "${icon}" -r 10001 -u "${urgency}" && echo "$icon" > "$capacity_file"
-fi
+# Send notification
+notify-send "$battery_name" "${status} battery: ${capacity}%" -i "battery-${icon_suffix}" -r 10001 -u "${urgency}"
