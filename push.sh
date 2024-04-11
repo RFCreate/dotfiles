@@ -10,6 +10,3 @@ shopt -s dotglob
 
 # Copy all files in this repo to $HOME
 cp -bur --suffix=".bak" "${scriptDir}"/!(pull.sh|push.sh|.git) "$HOME"
-
-# Replace bookmarks path, to make it relative to user
-sed -i "s|\$HOME|${HOME}|" "$HOME/.config/gtk-3.0/bookmarks"
