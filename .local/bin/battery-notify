@@ -36,19 +36,22 @@ battery_file=/tmp/battery-notify
 
 # Set icon name based on battery capacity
 # And set notification urgency level
-if [ "$capacity" -gt "$WARNING_LEVEL" ]; then
-    icon="battery-good"
-    urgency="normal"
-elif [ "$capacity" -gt "$CRITICAL_LEVEL" ]; then
-    icon="battery-low"
-    urgency="critical"
-else
-    icon="battery-caution"
-    urgency="critical"
-fi
+get_icon()
+{
+    if [ "$capacity" -gt "$WARNING_LEVEL" ]; then
+        icon="battery-good"
+        urgency="normal"
+    elif [ "$capacity" -gt "$CRITICAL_LEVEL" ]; then
+        icon="battery-low"
+        urgency="critical"
+    else
+        icon="battery-caution"
+        urgency="critical"
+    fi
+}
 
 # Append status to icon and change urgency level for status
-[ "$status" = "Charging" ] && compare_status && icon="${icon}-charging" urgency="normal" send_notification && write_status
+[ "$status" = "Charging" ] && compare_status && get_icon && icon="${icon}-charging" urgency="normal" send_notification && write_status
 
 # Set status as icon to send notifications at different battery levels
-[ "$status" = "Discharging" ] && status="$icon" compare_status && send_notification && status="$icon" write_status
+[ "$status" = "Discharging" ] && get_icon && status="$icon" compare_status && send_notification && status="$icon" write_status

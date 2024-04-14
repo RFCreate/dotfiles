@@ -6,8 +6,7 @@ export DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS"
 EOF
 
 # Start screenlocker and lock after 5 minutes
-xset s on
-xset s 300
+xset s on && xset s 300
 xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 
 # Map keyboard shortcuts
