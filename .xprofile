@@ -9,7 +9,10 @@ EOF
 xset s on && xset s 300
 xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 
-# Map keyboard shortcuts
+# Start polkit agent
+(sleep 1 && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1) &
+
+# Start keyboard shortcuts
 (sleep 1 && sxhkd) &
 
 # Start notification daemon
@@ -20,6 +23,9 @@ xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 
 # Start colour temperature adjustment
 (sleep 1 && redshift) &
+
+# Start network manager tray icon
+(sleep 1 && nm-applet) &
 
 # Start polybar after window manager
 (sleep 4 && polybar main 2>&1 | tee -a /tmp/polybar.log) & disown

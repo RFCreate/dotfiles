@@ -2,4 +2,4 @@
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Start window manager
-exec startxfce4
+exec xfwm4
