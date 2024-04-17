@@ -28,6 +28,4 @@ xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 (sleep 1 && nm-applet) &
 
 # Start polybar after window manager
-(sleep 4 && polybar main 2>&1 | tee -a /tmp/polybar.log) & disown
-# Workaround to hide polybar in fullscreen
-(sleep 6 && xdo hide -n polybar && xdo show -n polybar) &
+(sleep 2 && polybar main 2>&1 | tee -a /tmp/polybar.log) & disown

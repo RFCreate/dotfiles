@@ -2,4 +2,4 @@
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # Start window manager
-exec xfwm4
+exec qtile start
