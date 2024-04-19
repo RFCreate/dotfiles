@@ -19,7 +19,7 @@ xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 (sleep 1 && dunst) &
 
 # Start clipboard manager
-(sleep 1 && clipcatd) &
+(sleep 1 && clipcatd -r) &
 
 # Start colour temperature adjustment
 (sleep 1 && redshift) &
@@ -28,4 +28,4 @@ xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 (sleep 1 && nm-applet) &
 
 # Start polybar after window manager
-(sleep 2 && polybar main 2>&1 | tee -a /tmp/polybar.log) & disown
+(sleep 1 && polybar main 2>&1 | tee -a /tmp/polybar.log) & disown

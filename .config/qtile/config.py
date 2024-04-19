@@ -24,6 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from os.path import expanduser
 from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -34,8 +35,10 @@ mod = "mod4"
 terminal = guess_terminal()
 
 keys = [
-    Key([alt], "Tab", lazy.layout.next(), desc="Focus next window"),
-    Key([alt, "shift"], "Tab", lazy.layout.previous(), desc="Focus previous window"),
+    Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
+    Key([alt, "shift"], "Tab", lazy.group.prev_window(), desc="Focus previous window"),
+    Key([mod], "Tab",lazy.screen.next_group(skip_empty=True) , desc="Focus next group"),
+    Key([mod, "shift"], "Tab",lazy.screen.prev_group(skip_empty=True) , desc="Focus previous group"),
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
@@ -62,11 +65,11 @@ keys = [
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([alt], "F4", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
     Key([mod, "shift"], "space", lazy.window.toggle_floating(), desc="Toggle window floating"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "r", lazy.spawn(expanduser("~/.config/qtile/reload.sh")), desc="Reload config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
 
@@ -128,41 +131,19 @@ layouts = [
 
 widget_defaults = dict(
     font="sans",
-    fontsize=12,
+    fontsize=14,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
+        bottom=bar.Bar([
+            widget.CurrentLayoutIcon(scale=0.75),
+            widget.CurrentLayout(fmt="<b>{} </b>", foreground="#ffff00"),
+            widget.Sep(),
+            widget.TaskList(theme_mode = "fallback", unfocused_border="111111"),
+        ], 28)
     ),
 ]
 
