@@ -138,12 +138,17 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar([
-            widget.CurrentLayoutIcon(scale=0.75),
-            widget.CurrentLayout(fmt="<b>{} </b>", foreground="#ffff00"),
-            widget.Sep(),
-            widget.TaskList(theme_mode = "fallback", unfocused_border="111111"),
-        ], 28)
+        bottom=bar.Bar(
+            widgets=[
+                widget.CurrentLayoutIcon(scale=0.75),
+                widget.CurrentLayout(fmt="<b>{} </b>", foreground="#ffff00"),
+                widget.Sep(),
+                widget.TaskList(theme_mode = "fallback", unfocused_border="#111111"),
+            ],
+            size=28,
+            border_width=[1, 0, 0, 0],
+            border_color="#888888",
+        ),
     ),
 ]
 

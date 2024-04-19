@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Terminate polybar running bar instances
+# Terminate polybar
 # killall -q polybar
 # Terminate polybar if ipc is enabled
 polybar-msg cmd quit
