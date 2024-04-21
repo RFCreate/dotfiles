@@ -66,11 +66,18 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([alt], "F4", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
     Key([mod, "shift"], "space", lazy.window.toggle_floating(), desc="Toggle window floating"),
     Key([mod, "control"], "r", lazy.spawn(expanduser("~/.config/qtile/reload.sh")), desc="Reload config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+]
+
+mouse = [
+    Click([mod], "Button1", lazy.window.bring_to_front()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Click([mod, "shift"], "Button1", lazy.window.bring_to_front()),
+    Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -96,7 +103,7 @@ for i in groups:
             Key(
                 [mod],
                 i.name,
-                lazy.group[i.name].toscreen(),
+                lazy.group[i.name].toscreen(toggle=True),
                 desc="Switch to group {}".format(i.name),
             ),
             # mod1 + shift + group number = switch to & move focused window to group
@@ -115,9 +122,8 @@ for i in groups:
 
 layouts = [
     layout.Max(),
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
+    layout.Columns(),
+    # layout.Stack(),
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadTall(),
@@ -128,6 +134,8 @@ layouts = [
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
+
+floating_layout=layout.Floating(border_width=0)
 
 widget_defaults = dict(
     font="sans",
@@ -142,58 +150,12 @@ screens = [
             widgets=[
                 widget.CurrentLayoutIcon(scale=0.75),
                 widget.CurrentLayout(fmt="<b>{} </b>", foreground="#ffff00"),
-                widget.Sep(),
+                widget.Sep(foreground="#ffffff"),
                 widget.TaskList(theme_mode = "fallback", unfocused_border="#111111"),
             ],
             size=28,
             border_width=[1, 0, 0, 0],
-            border_color="#888888",
+            border_color="#ffffff",
         ),
     ),
 ]
-
-# Drag floating layouts.
-mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
-]
-
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
-bring_front_click = False
-floats_kept_above = True
-cursor_warp = False
-floating_layout = layout.Floating(
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-    ]
-)
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
-
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
-auto_minimize = True
-
-# When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
-wmname = "LG3D"
