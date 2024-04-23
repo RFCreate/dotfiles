@@ -35,12 +35,27 @@ mod = "mod4"
 terminal = guess_terminal()
 
 keys = [
+    # Change window in focus
     Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
     Key([alt, "shift"], "Tab", lazy.group.prev_window(), desc="Focus previous window"),
+    # Change group in focus
     Key([mod], "Tab",lazy.screen.next_group(skip_empty=True) , desc="Focus next group"),
     Key([mod, "shift"], "Tab",lazy.screen.prev_group(skip_empty=True) , desc="Focus previous group"),
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
+    # Change window state
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
+    Key([mod, "shift"], "space", lazy.window.toggle_floating(), desc="Toggle window floating"),
+    Key([mod], "Up", lazy.window.toggle_floating(), desc="Toggle window floating"),
+    Key([mod], "Down", lazy.window.toggle_minimize(), desc="Toggle window minimize"),
+    # Move floating window
+    Key([mod, "shift"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=-10, dy=0)')),
+    Key([mod, "shift"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=10, dy=0)')),
+    Key([mod, "shift"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=10)')),
+    Key([mod, "shift"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=-10)')),
+    # Resize floating window (Numbers don't seem to be normalized)
+    Key([mod, "control"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=-10, dh=0)')),
+    Key([mod, "control"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=20, dh=0)')),
+    Key([mod, "control"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=30)')),
+    Key([mod, "control"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=-10)')),
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -64,59 +79,34 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    # Toggle between different layouts as defined below
+    # Toggle between different layouts
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
-    Key([mod, "shift"], "space", lazy.window.toggle_floating(), desc="Toggle window floating"),
     Key([mod, "control"], "r", lazy.spawn(expanduser("~/.config/qtile/reload.sh")), desc="Reload config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
 
 mouse = [
+    # Drag window in focus
     Click([mod], "Button1", lazy.window.bring_to_front()),
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    # Resize window in focus
     Click([mod, "shift"], "Button1", lazy.window.bring_to_front()),
     Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
-
-
 groups = [Group(i) for i in "123456789"]
+# groups = [Group(i) for i in "󰈹󰨞󰏆6789"]
 
 for i in groups:
     keys.extend(
         [
-            # mod1 + group number = switch to group
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(toggle=True),
-                desc="Switch to group {}".format(i.name),
-            ),
-            # mod1 + shift + group number = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + group number = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
+            Key([mod], i.name, lazy.group[i.name].toscreen(toggle=True),
+                desc="Switch to group {}".format(i.name)),
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name)),
+            Key([mod, alt], i.name, lazy.window.togroup(i.name),
+                desc="Move focused window to group {}".format(i.name)),
         ]
     )
 
@@ -135,7 +125,7 @@ layouts = [
     # layout.Zoomy(),
 ]
 
-floating_layout=layout.Floating(border_width=0)
+floating_layout = layout.Floating(border_width=0)
 
 widget_defaults = dict(
     font="sans",
@@ -149,9 +139,9 @@ screens = [
         bottom=bar.Bar(
             widgets=[
                 widget.CurrentLayoutIcon(scale=0.75),
-                widget.CurrentLayout(fmt="<b>{} </b>", foreground="#ffff00"),
-                widget.Sep(foreground="#ffffff"),
-                widget.TaskList(theme_mode = "fallback", unfocused_border="#111111"),
+                widget.CurrentLayout(fmt="<b>{}</b>", foreground="#ffff00"),
+                widget.Sep(foreground="#ffffff", padding=6),
+                widget.TaskList(theme_mode="fallback", unfocused_border="#111111"),
             ],
             size=28,
             border_width=[1, 0, 0, 0],
@@ -159,3 +149,18 @@ screens = [
         ),
     ),
 ]
+
+bring_front_click = "floating_only"
+follow_mouse_focus = False
+
+# Add key bindings to switch VTs in Wayland.
+# We can't check qtile.core.name in default config as it is loaded before qtile is started
+# We therefore defer the check until the key binding is run by using .when(func=...)
+for vt in range(1, 8):
+    keys.append(
+        Key(
+            ["control", "mod1"], f"f{vt}",
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            desc=f"Switch to VT{vt}",
+        )
+    )
