@@ -82,7 +82,7 @@ keys = [
     # Toggle between different layouts
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "control"], "r", lazy.spawn(expanduser("~/.config/qtile/reload.sh")), desc="Reload config"),
+    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
 

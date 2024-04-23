@@ -26,6 +26,3 @@ xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 
 # Start network manager tray icon
 (sleep 1 && nm-applet) &
-
-# Start polybar after window manager
-(sleep 1 && polybar main 2>&1 | tee -a /tmp/polybar.log) & disown
