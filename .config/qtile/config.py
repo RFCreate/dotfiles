@@ -129,23 +129,80 @@ floating_layout = layout.Floating(border_width=0)
 
 widget_defaults = dict(
     font="sans",
-    fontsize=14,
+    fontsize=16,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
 
+bar_defaults = dict(
+    size=30,
+    border_color="#ffffff",
+    background="#2b2b2b",
+)
+
+widget_sep = dict(
+    foreground="#bbbbbb",
+    padding=18,
+)
+text_color = "#f0d080"
+
 screens = [
     Screen(
+        top=bar.Bar(
+            widgets=[
+                widget.GroupBox(
+                    block_highlight_text_color="#ffffff",
+                    borderwidth=5,
+                    highlight_color="#555555",
+                    highlight_method="line",
+                    inactive="#888888",
+                    this_current_screen_border="#f0d040",
+                    this_screen_border="#f0d040",
+                    padding=4,
+                ),
+                widget.Spacer(),
+                widget.Systray(padding=8),
+                widget.Sep(**widget_sep),
+                widget.TextBox("VOL", foreground=text_color),
+                widget.Volume(),
+                widget.Sep(**widget_sep),
+                widget.TextBox("CPU", foreground=text_color),
+                widget.CPU(format="{load_percent:.0f}%"),
+                widget.Sep(**widget_sep),
+                widget.TextBox("RAM", foreground=text_color),
+                widget.Memory(format="{MemPercent:.0f}%"),
+                widget.Sep(**widget_sep),
+                widget.TextBox("SWAP", foreground=text_color),
+                widget.Memory(format="{SwapPercent:.0f}%"),
+                widget.Sep(**widget_sep),
+                widget.TextBox("BAT", foreground=text_color),
+                widget.Battery(
+                    format="{percent:2.0%} {char}",
+                    full_char="",
+                    charge_char="",
+                    discharge_char="",
+                    empty_char="",
+                    low_percentage=0.25,
+                ),
+                widget.Sep(**widget_sep),
+                widget.Clock(format="%d/%m/%Y %I:%M:%S %p", foreground=text_color),
+            ],
+            border_width=[0, 0, 1, 0],
+            **bar_defaults
+        ),
         bottom=bar.Bar(
             widgets=[
                 widget.CurrentLayoutIcon(scale=0.75),
                 widget.CurrentLayout(fmt="<b>{}</b>", foreground="#ffff00"),
                 widget.Sep(foreground="#ffffff", padding=6),
-                widget.TaskList(theme_mode="fallback", unfocused_border="#111111"),
+                widget.TaskList(
+                    border="#0066ff",
+                    theme_mode="fallback",
+                    unfocused_border="#666666",
+                ),
             ],
-            size=28,
             border_width=[1, 0, 0, 0],
-            border_color="#ffffff",
+            **bar_defaults
         ),
     ),
 ]

@@ -32,15 +32,15 @@ XF86MonBrightnessDown
 
 # Raise volume
 XF86AudioRaiseVolume
-    pactl set-sink-volume 0 +5%; volume-notify
+    pactl set-sink-volume @DEFAULT_SINK@ +5%; volume-notify
 
 # Lower volume
 XF86AudioLowerVolume
-    pactl set-sink-volume 0 -5%; volume-notify
+    pactl set-sink-volume @DEFAULT_SINK@ -5%; volume-notify
 
 # Mute/unmute the volume
 XF86AudioMute
-    pactl set-sink-mute 0 toggle; volume-notify
+    pactl set-sink-mute @DEFAULT_SINK@ toggle; volume-notify
 
 # Open program launcher
 super + q
