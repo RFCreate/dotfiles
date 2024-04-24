@@ -25,7 +25,7 @@
 # SOFTWARE.
 
 from os.path import expanduser
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -81,6 +81,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([alt], "F4", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -95,20 +96,34 @@ mouse = [
     Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
 
-groups = [Group(i) for i in "123456789"]
-# groups = [Group(i) for i in "󰈹󰨞󰏆6789"]
+# Define workspaces
+groups = [
+    Group("1", label="󰈹", matches=[Match(wm_class="firefox")]),
+    Group("2", label=None),
+    Group("3", label="", matches=[Match(wm_class="lxterminal")]),
+    Group("4", label=None),
+    Group("5", label="", matches=[Match(wm_class="pcmanfm")]),
+    Group("6", label=None),
+    Group("7", label="󰨞", matches=[Match(wm_class="vscodium")]),
+    Group("8", label=None),
+    Group("9", label="󰏆", matches=[Match(wm_class="DesktopEditors")]),
+]
+
+# Move to group where window spawn
+@hook.subscribe.group_window_add
+def group_window_add(group, window):
+    group.toscreen()
 
 for i in groups:
-    keys.extend(
-        [
-            Key([mod], i.name, lazy.group[i.name].toscreen(toggle=True),
-                desc="Switch to group {}".format(i.name)),
-            Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name)),
-            Key([mod, alt], i.name, lazy.window.togroup(i.name),
-                desc="Move focused window to group {}".format(i.name)),
-        ]
-    )
+    keys.extend([
+        # Keys to navigate workspaces
+        Key([mod], i.name, lazy.group[i.name].toscreen(toggle=True),
+            desc="Switch to group {}".format(i.name)),
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
+            desc="Switch to & move focused window to group {}".format(i.name)),
+        Key([mod, alt], i.name, lazy.window.togroup(i.name),
+            desc="Move focused window to group {}".format(i.name)),
+    ])
 
 layouts = [
     layout.Max(),
@@ -125,7 +140,10 @@ layouts = [
     # layout.Zoomy(),
 ]
 
-floating_layout = layout.Floating(border_width=0)
+# Floating window attributes
+floating_layout = layout.Floating(
+    border_focus="#000000", border_normal="#990000", border_width=1,
+)
 
 widget_defaults = dict(
     font="sans",
@@ -139,18 +157,21 @@ bar_defaults = dict(
     border_color="#ffffff",
     background="#2b2b2b",
 )
-
 widget_sep = dict(
     foreground="#bbbbbb",
     padding=18,
 )
-text_color = "#f0d080"
+top_bar_text = dict(
+    font="mesloLGSNF",
+    foreground="#f0d080",
+)
 
 screens = [
     Screen(
         top=bar.Bar(
             widgets=[
                 widget.GroupBox(
+                    active="#00ffff",
                     block_highlight_text_color="#ffffff",
                     borderwidth=5,
                     highlight_color="#555555",
@@ -159,23 +180,24 @@ screens = [
                     this_current_screen_border="#f0d040",
                     this_screen_border="#f0d040",
                     padding=4,
+                    fontsize=18,
                 ),
                 widget.Spacer(),
                 widget.Systray(padding=8),
                 widget.Sep(**widget_sep),
-                widget.TextBox("VOL", foreground=text_color),
+                widget.TextBox("VOL", **top_bar_text),
                 widget.Volume(),
                 widget.Sep(**widget_sep),
-                widget.TextBox("CPU", foreground=text_color),
+                widget.TextBox("CPU", **top_bar_text),
                 widget.CPU(format="{load_percent:.0f}%"),
                 widget.Sep(**widget_sep),
-                widget.TextBox("RAM", foreground=text_color),
+                widget.TextBox("RAM", **top_bar_text),
                 widget.Memory(format="{MemPercent:.0f}%"),
                 widget.Sep(**widget_sep),
-                widget.TextBox("SWAP", foreground=text_color),
+                widget.TextBox("SWAP", **top_bar_text),
                 widget.Memory(format="{SwapPercent:.0f}%"),
                 widget.Sep(**widget_sep),
-                widget.TextBox("BAT", foreground=text_color),
+                widget.TextBox("BAT", **top_bar_text),
                 widget.Battery(
                     format="{percent:2.0%} {char}",
                     full_char="",
@@ -183,9 +205,10 @@ screens = [
                     discharge_char="",
                     empty_char="",
                     low_percentage=0.25,
+                    show_short_text=False,
                 ),
                 widget.Sep(**widget_sep),
-                widget.Clock(format="%d/%m/%Y %I:%M:%S %p", foreground=text_color),
+                widget.Clock(format="%d/%m/%Y %I:%M:%S %p", **top_bar_text),
             ],
             border_width=[0, 0, 1, 0],
             **bar_defaults
@@ -196,9 +219,10 @@ screens = [
                 widget.CurrentLayout(fmt="<b>{}</b>", foreground="#ffff00"),
                 widget.Sep(foreground="#ffffff", padding=6),
                 widget.TaskList(
-                    border="#0066ff",
+                    border="#005577",
+                    highlight_method="block",
                     theme_mode="fallback",
-                    unfocused_border="#666666",
+                    unfocused_border="#444444",
                 ),
             ],
             border_width=[1, 0, 0, 0],
