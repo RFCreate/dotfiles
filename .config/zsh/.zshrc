@@ -1,7 +1,7 @@
 # Print help message if tmp file and script exist
-if [ ! -f /tmp/.zplugins ] && [ -f "$ZDOTDIR/.zplugins" ]; then
-    printf "Update zsh plugins with 'source \$ZDOTDIR/.zplugins'\n\n"
-    touch /tmp/.zplugins
+if [ ! -f /tmp/zplugins ] && [ -f "$ZDOTDIR/zplugins.sh" ]; then
+    printf "Install|Update zsh plugins with 'source \$ZDOTDIR/zplugins.sh'\n\n"
+    touch /tmp/zplugins
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -39,10 +39,10 @@ source_script() {
 }
 
 # Source zsh config files
+source_script "$HOME/.config/aliasrc"
 source_script "$ZDOTDIR/.setopt"
 source_script "$ZDOTDIR/.zstyle"
 source_script "$ZDOTDIR/.bindkey"
-source_script "$ZDOTDIR/.alias"
 
 # Load zsh plugins
 source_script "$ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -54,8 +54,8 @@ source_script "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
 source_script "$ZDOTDIR/.p10k.zsh"
 
 # Load fzf CTRL-R history search
-FZF_DEFAULT_OPTS='--height 100% --layout=default --border'
-FZF_CTRL_T_COMMAND= FZF_ALT_C_COMMAND= source_script /usr/share/fzf/key-bindings.zsh
+export FZF_DEFAULT_OPTS="--height 100% --layout=default --border"
+FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" source_script /usr/share/fzf/key-bindings.zsh
 
 # Remove source function
 unset -f source_script

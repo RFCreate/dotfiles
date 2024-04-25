@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Define ZDOTDIR if it wasn't
 ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
 [ ! -d "$ZDOTDIR" ] && mkdir -p "$ZDOTDIR"
@@ -11,7 +13,7 @@ get_zplugin()
 
     # If plugin directoy do not exist clone otherwise pull
     if [ ! -d "$repoDir" ]; then
-        echo "Cloning $repoName..."
+        echo "Installing $repoName..."
         # Shallow clone zsh plugin repo
         git clone -q --depth 1 "https://github.com/$repoOwner/$repoName.git" "$repoDir"
     else

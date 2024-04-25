@@ -1,33 +1,49 @@
-# Changing Directories
+# Change directory automatically
 setopt autocd
+
+# Push old directory to the stack
 setopt autopushd
+# Ignore duplicates in the stack
 setopt pushdignoredups
+# Use -n to specify a directory in the stack
 setopt pushdminus
 
-# Completion
+# Move cursor to the end after completion
 setopt alwaystoend
+
+# Use menu completion after second tab
 setopt automenu
+# Disable completion on first tab
 unsetopt menucomplete
 
-# Expansion and Globbing
+# Match all files including dotfiles
 setopt globdots
 
-# History
+# Save command with timestamp
 setopt extendedhistory
+
+# Do not save duplicates to history
 setopt histexpiredupsfirst
+setopt histfindnodups
 setopt histignorealldups
 setopt histignoredups
 setopt histignorespace
 setopt histsavenodups
+
+# Do not execute history expansion
 setopt histverify
+
+# Save command to history after execution with timestamp
 setopt incappendhistorytime
 
-# Input/Output
+# Allow '>' redirection overwrite
 setopt clobber
+
+# Allow comments
 setopt interactivecomments
 
-# Shell Emulation
+# Allow '>>' file creation
 setopt appendcreate
 
-# ZLE
+# Disable error beep
 unsetopt beep
