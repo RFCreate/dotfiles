@@ -5,21 +5,18 @@ WARNING_LEVEL=25
 CRITICAL_LEVEL=10
 
 # Send notification
-send_notification()
-{
+send_notification() {
     notify-send "$status battery: ${capacity}%" -i "${icon}" -r 10001 -u "${urgency}"
 }
 
 # Write status to file
-write_status()
-{
+write_status() {
     echo "$status" > "$battery_file"
     exit
 }
 
 # Do nothing if status is the same as file
-compare_status()
-{
+compare_status() {
     [ ! -f "$battery_file" ] || [ "$status" != "$(cat "$battery_file")" ] || exit 0
 }
 
@@ -36,8 +33,7 @@ battery_file=/tmp/battery-notify
 
 # Set icon name based on battery capacity
 # And set notification urgency level
-get_icon()
-{
+get_icon() {
     if [ "$capacity" -gt "$WARNING_LEVEL" ]; then
         icon="battery-good"
         urgency="normal"

@@ -14,7 +14,7 @@
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true
     },
-    "shellformat.flag": "-bn -ci -sr -kp -fn",
+    "shellformat.flag": "-bn -ci -sr -kp",
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format",
         "editor.formatOnSave": true

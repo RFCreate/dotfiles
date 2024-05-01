@@ -12,9 +12,6 @@ xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 # Start polkit agent
 (sleep 1 && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1) &
 
-# Start keyboard shortcuts
-(sleep 1 && sxhkd) &
-
 # Start notification daemon
 (sleep 1 && dunst) &
 

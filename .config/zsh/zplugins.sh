@@ -5,8 +5,7 @@ ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
 [ ! -d "$ZDOTDIR" ] && mkdir -p "$ZDOTDIR"
 
 # Clone or pull github zsh plugin
-get_zplugin()
-{
+get_zplugin() {
     local repoOwner="$1"
     local repoName="$2"
     local repoDir="$ZDOTDIR/$repoName"

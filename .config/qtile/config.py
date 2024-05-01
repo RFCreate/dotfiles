@@ -53,33 +53,39 @@ keys = [
     # Toggle between different layouts
     Key([mod], "space", lazy.next_layout(), desc="Toggle next layout"),
     Key([mod, "shift"], "space", lazy.prev_layout(), desc="Toggle previous layout"),
-    # Move floating window
-    Key([mod, "shift"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=-10, dy=0)')),
-    Key([mod, "shift"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=10, dy=0)')),
-    Key([mod, "shift"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=10)')),
-    Key([mod, "shift"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=-10)')),
-    # Resize floating window (Numbers don't seem to be normalized)
-    Key([mod, "control"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=-10, dh=0)')),
-    Key([mod, "control"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=20, dh=0)')),
-    Key([mod, "control"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=30)')),
-    Key([mod, "control"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=-10)')),
+    # # Move floating window
+    # Key([mod, "shift"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=-10, dy=0)')),
+    # Key([mod, "shift"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=10, dy=0)')),
+    # Key([mod, "shift"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=10)')),
+    # Key([mod, "shift"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=-10)')),
+    # # Resize floating window (Numbers don't seem to be normalized)
+    # Key([mod, "control"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=-10, dh=0)')),
+    # Key([mod, "control"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=20, dh=0)')),
+    # Key([mod, "control"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=30)')),
+    # Key([mod, "control"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=-10)')),
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    # Shuffle/Move focused window
+    Key([mod, "shift"], "h", lazy.window.move_floating(dx=-10, dy=0).when(when_floating=True),
+        lazy.layout.shuffle_left().when(when_floating=False), desc="Move window left"),
+    Key([mod, "shift"], "l", lazy.window.move_floating(dx=10, dy=0).when(when_floating=True),
+        lazy.layout.shuffle_right().when(when_floating=False), desc="Move window right"),
+    Key([mod, "shift"], "j", lazy.window.move_floating(dx=0, dy=10).when(when_floating=True),
+        lazy.layout.shuffle_down().when(when_floating=False), desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.window.move_floating(dx=0, dy=-10).when(when_floating=True),
+        lazy.layout.shuffle_up().when(when_floating=False), desc="Move window up"),
+    # Grow/Resize focused window
+    Key([mod, "control"], "h", lazy.window.resize_floating(dw=-10, dh=0).when(when_floating=True),
+        lazy.layout.grow_left().when(when_floating=False), desc="Grow window left"),
+    Key([mod, "control"], "l", lazy.window.resize_floating(dw=20, dh=0).when(when_floating=True),
+        lazy.layout.grow_right().when(when_floating=False), desc="Grow window right"),
+    Key([mod, "control"], "j", lazy.window.resize_floating(dw=0, dh=30).when(when_floating=True),
+        lazy.layout.grow_down().when(when_floating=False), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.window.resize_floating(dw=0, dh=-10).when(when_floating=True),
+        lazy.layout.grow_up().when(when_floating=False), desc="Grow window up"),
     # Grow or shrink tiled windows
     Key([mod], "plus", lazy.layout.grow()),
     Key([mod], "minus", lazy.layout.shrink()),
@@ -107,6 +113,37 @@ mouse = [
     Click([mod, "shift"], "Button1", lazy.window.bring_to_front()),
     Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
+
+# Application keys
+keys.extend([
+    # Screenshot commands
+    Key([], "Print", lazy.spawn("maimpick Select"), desc="Save screenshot of selection"),
+    Key(["shift"], "Print", lazy.spawn("maimpick Window"), desc="Save screenshot of window"),
+    Key([alt], "Print", lazy.spawn("maimpick Screen"), desc="Save screenshot of screen"),
+    Key(["control"], "Print", lazy.spawn("maimpick Copy Select"), desc="Copy screenshot of selection"),
+    Key(["control", "shift"], "Print", lazy.spawn("maimpick Copy Window"), desc="Copy screenshot of window"),
+    Key(["control", alt], "Print", lazy.spawn("maimpick Copy Screen"), desc="Copy screenshot of screen"),
+    # Brightness commands
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q set +5%"),
+        lazy.spawn("brightness-notify"), desc="Raise brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q set 5%-"),
+        lazy.spawn("brightness-notify"), desc="Lower brightness"),
+    # Volume commands
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+        lazy.spawn("volume-notify"), desc="Raise volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+        lazy.spawn("volume-notify"), desc="Lower volume"),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+        lazy.spawn("volume-notify"), desc="Mute/unmute volume"),
+    # Application programs
+    Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
+    Key([mod], "w", lazy.spawn("rofi -show window"), desc="Open window switcher"),
+    Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
+    Key([mod], "v", lazy.spawn("clipcat-menu"), desc="Open clipboard history"),
+    Key([mod], "e", lazy.spawn("pcmanfm"), desc="Open file manager"),
+    Key([mod], "t", lazy.spawn("lxterminal"), desc="Open terminal"),
+    Key(["control", "shift"], "Escape", lazy.spawn("lxtask"), desc="Open task manager"),
+])
 
 # Define workspaces
 groups = [
@@ -148,7 +185,7 @@ layouts = [
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
-    #layout.VerticalTile(),
+    # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 
@@ -196,8 +233,9 @@ screens = [
                 widget.Spacer(),
                 widget.Systray(padding=8),
                 widget.Sep(**top_bar_sep),
+                widget.PulseVolume(mute_format="muted {volume}%", mute_foreground="#888888"),
                 widget.TextBox("VOL", **top_bar_text),
-                widget.Volume(mute_format="muted {volume}%"),
+                widget.Volume(mute_format="muted {volume}%", mute_foreground="#888888"),
                 widget.Sep(**top_bar_sep),
                 widget.TextBox("CPU", **top_bar_text),
                 widget.CPU(format="{load_percent:.0f}%"),
