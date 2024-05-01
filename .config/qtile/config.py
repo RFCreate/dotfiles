@@ -39,13 +39,20 @@ keys = [
     Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
     Key([alt, "shift"], "Tab", lazy.group.prev_window(), desc="Focus previous window"),
     # Change group in focus
-    Key([mod], "Tab",lazy.screen.next_group(skip_empty=True) , desc="Focus next group"),
-    Key([mod, "shift"], "Tab",lazy.screen.prev_group(skip_empty=True) , desc="Focus previous group"),
+    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True) , desc="Switch to next group"),
+    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True) , desc="Switch to previous group"),
+    Key([mod], "0", lazy.screen.toggle_group() , desc="Switch to last group"),
     # Change window state
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
-    Key([mod, "shift"], "space", lazy.window.toggle_floating(), desc="Toggle window floating"),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
     Key([mod], "Up", lazy.window.toggle_floating(), desc="Toggle window floating"),
     Key([mod], "Down", lazy.window.toggle_minimize(), desc="Toggle window minimize"),
+    # Close active window
+    Key([alt], "F4", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
+    # Toggle between different layouts
+    Key([mod], "space", lazy.next_layout(), desc="Toggle next layout"),
+    Key([mod, "shift"], "space", lazy.prev_layout(), desc="Toggle previous layout"),
     # Move floating window
     Key([mod, "shift"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=-10, dy=0)')),
     Key([mod, "shift"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=10, dy=0)')),
@@ -73,16 +80,21 @@ keys = [
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    # Grow or shrink tiled windows
+    Key([mod], "plus", lazy.layout.grow()),
+    Key([mod], "minus", lazy.layout.shrink()),
+    Key([mod, "shift"], "plus", lazy.layout.grow_main()),
+    Key([mod, "shift"], "minus", lazy.layout.shrink_main()),
+    Key([mod, "control"], "plus", lazy.layout.maximize(), desc="Grow tiled window to max size"),
+    Key([mod], "n", lazy.layout.normalize(), desc="Reset secondary window sizes"),
+    Key([mod, "shift"], "n", lazy.layout.reset(), desc="Reset all window sizes"),
+    Key([mod, alt], "f", lazy.layout.flip()),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    # Toggle between different layouts
-    Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([alt], "F4", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
+    # Change qtile state
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
@@ -99,13 +111,13 @@ mouse = [
 # Define workspaces
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")]),
-    Group("2", label=None),
-    Group("3", label="", matches=[Match(wm_class="lxterminal")]),
-    Group("4", label=None),
-    Group("5", label="", matches=[Match(wm_class="pcmanfm")]),
-    Group("6", label=None),
-    Group("7", label="󰨞", matches=[Match(wm_class="vscodium")]),
-    Group("8", label=None),
+    Group("2", label="", matches=[Match(wm_class="lxterminal")]),
+    Group("3", label="󰨞", matches=[Match(wm_class="vscodium")]),
+    Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
+    Group("5", label="", matches=[Match(wm_class="l3afpad")]),
+    Group("6", label="󰋩", matches=[Match(wm_class="imv")]),
+    Group("7", label="󰕧", matches=[Match(wm_class="mpv")]),
+    Group("8", label="󰿎", matches=[Match(wm_class="shotcut")]),
     Group("9", label="󰏆", matches=[Match(wm_class="DesktopEditors")]),
 ]
 
@@ -127,37 +139,36 @@ for i in groups:
 
 layouts = [
     layout.Max(),
-    layout.Columns(),
+    # layout.Columns(),
     # layout.Stack(),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
+    layout.MonadTall(),
+    layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
-    # layout.VerticalTile(),
+    #layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 
 # Floating window attributes
 floating_layout = layout.Floating(
-    border_focus="#000000", border_normal="#990000", border_width=1,
+    border_focus="#888888", border_normal="#ff0000", border_width=1,
 )
 
+# Default values for widgets and bars
 widget_defaults = dict(
     font="sans",
     fontsize=16,
     padding=3,
 )
-extension_defaults = widget_defaults.copy()
-
 bar_defaults = dict(
     size=30,
     border_color="#ffffff",
     background="#2b2b2b",
 )
-widget_sep = dict(
+top_bar_sep = dict(
     foreground="#bbbbbb",
     padding=18,
 )
@@ -184,19 +195,19 @@ screens = [
                 ),
                 widget.Spacer(),
                 widget.Systray(padding=8),
-                widget.Sep(**widget_sep),
+                widget.Sep(**top_bar_sep),
                 widget.TextBox("VOL", **top_bar_text),
-                widget.Volume(),
-                widget.Sep(**widget_sep),
+                widget.Volume(mute_format="muted {volume}%"),
+                widget.Sep(**top_bar_sep),
                 widget.TextBox("CPU", **top_bar_text),
                 widget.CPU(format="{load_percent:.0f}%"),
-                widget.Sep(**widget_sep),
+                widget.Sep(**top_bar_sep),
                 widget.TextBox("RAM", **top_bar_text),
                 widget.Memory(format="{MemPercent:.0f}%"),
-                widget.Sep(**widget_sep),
+                widget.Sep(**top_bar_sep),
                 widget.TextBox("SWAP", **top_bar_text),
                 widget.Memory(format="{SwapPercent:.0f}%"),
-                widget.Sep(**widget_sep),
+                widget.Sep(**top_bar_sep),
                 widget.TextBox("BAT", **top_bar_text),
                 widget.Battery(
                     format="{percent:2.0%} {char}",
@@ -206,8 +217,9 @@ screens = [
                     empty_char="",
                     low_percentage=0.25,
                     show_short_text=False,
+                    notify_below=25,
                 ),
-                widget.Sep(**widget_sep),
+                widget.Sep(**top_bar_sep),
                 widget.Clock(format="%d/%m/%Y %I:%M:%S %p", **top_bar_text),
             ],
             border_width=[0, 0, 1, 0],
