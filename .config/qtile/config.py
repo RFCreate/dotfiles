@@ -53,16 +53,6 @@ keys = [
     # Toggle between different layouts
     Key([mod], "space", lazy.next_layout(), desc="Toggle next layout"),
     Key([mod, "shift"], "space", lazy.prev_layout(), desc="Toggle previous layout"),
-    # # Move floating window
-    # Key([mod, "shift"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=-10, dy=0)')),
-    # Key([mod, "shift"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=10, dy=0)')),
-    # Key([mod, "shift"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=10)')),
-    # Key([mod, "shift"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.move_floating(dx=0, dy=-10)')),
-    # # Resize floating window (Numbers don't seem to be normalized)
-    # Key([mod, "control"], "Left", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=-10, dh=0)')),
-    # Key([mod, "control"], "Right", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=20, dh=0)')),
-    # Key([mod, "control"], "Down", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=30)')),
-    # Key([mod, "control"], "Up", lazy.window.eval('if self.info()["floating"] is True: self.resize_floating(dw=0, dh=-10)')),
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -91,13 +81,12 @@ keys = [
     Key([mod], "minus", lazy.layout.shrink()),
     Key([mod, "shift"], "plus", lazy.layout.grow_main()),
     Key([mod, "shift"], "minus", lazy.layout.shrink_main()),
+    # Change tiled window state
     Key([mod, "control"], "plus", lazy.layout.maximize(), desc="Grow tiled window to max size"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset secondary window sizes"),
     Key([mod, "shift"], "n", lazy.layout.reset(), desc="Reset all window sizes"),
     Key([mod, alt], "f", lazy.layout.flip()),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with multiple stack panes
+    # Toggle between split and unsplit sides of the stack
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Change qtile state
@@ -233,7 +222,6 @@ screens = [
                 widget.Spacer(),
                 widget.Systray(padding=8),
                 widget.Sep(**top_bar_sep),
-                widget.PulseVolume(mute_format="muted {volume}%", mute_foreground="#888888"),
                 widget.TextBox("VOL", **top_bar_text),
                 widget.Volume(mute_format="muted {volume}%", mute_foreground="#888888"),
                 widget.Sep(**top_bar_sep),
