@@ -1,7 +1,5 @@
 {
     "workbench.iconTheme": "material-icon-theme",
-    "debug.console.fontFamily": "'MesloLGS NF'",
-    "terminal.integrated.fontFamily": "'MesloLGS NF'",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.minimumContrastRatio": 1,
     "files.insertFinalNewline": true,

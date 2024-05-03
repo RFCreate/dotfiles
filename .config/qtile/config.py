@@ -24,7 +24,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from os.path import expanduser
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -39,9 +38,9 @@ keys = [
     Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
     Key([alt, "shift"], "Tab", lazy.group.prev_window(), desc="Focus previous window"),
     # Change group in focus
-    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True) , desc="Switch to next group"),
-    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True) , desc="Switch to previous group"),
-    Key([mod], "0", lazy.screen.toggle_group() , desc="Switch to last group"),
+    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Switch to next group"),
+    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Switch to previous group"),
+    Key([mod], "0", lazy.screen.toggle_group(), desc="Switch to last group"),
     # Change window state
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
     Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
@@ -85,9 +84,10 @@ keys = [
     Key([mod, "control"], "plus", lazy.layout.maximize(), desc="Grow tiled window to max size"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset secondary window sizes"),
     Key([mod, "shift"], "n", lazy.layout.reset(), desc="Reset all window sizes"),
-    Key([mod, alt], "f", lazy.layout.flip()),
+    Key([mod, alt], "f", lazy.layout.flip(), desc="Flip main window position"),
+    Key([mod, "shift"], "Return", lazy.layout.swap_main(), desc="Send window to main"),
     # Toggle between split and unsplit sides of the stack
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
+    Key([mod, alt], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Change qtile state
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
@@ -185,7 +185,7 @@ floating_layout = layout.Floating(
 
 # Default values for widgets and bars
 widget_defaults = dict(
-    font="sans",
+    font="monospace",
     fontsize=16,
     padding=3,
 )
@@ -199,8 +199,7 @@ top_bar_sep = dict(
     padding=18,
 )
 top_bar_text = dict(
-    font="mesloLGSNF",
-    foreground="#f0d080",
+    foreground="#ffdd66",
 )
 
 screens = [
@@ -214,8 +213,8 @@ screens = [
                     highlight_color="#555555",
                     highlight_method="line",
                     inactive="#888888",
-                    this_current_screen_border="#f0d040",
-                    this_screen_border="#f0d040",
+                    this_current_screen_border="#ffdd66",
+                    this_screen_border="#ffdd66",
                     padding=4,
                     fontsize=18,
                 ),
@@ -261,6 +260,7 @@ screens = [
                     highlight_method="block",
                     theme_mode="fallback",
                     unfocused_border="#444444",
+                    font="sans"
                 ),
             ],
             border_width=[1, 0, 0, 0],
