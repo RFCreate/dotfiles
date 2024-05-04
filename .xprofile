@@ -2,6 +2,10 @@
 xset s on && xset s 300
 xss-lock --transfer-sleep-lock -- i3lock -c 222222 --nofork &
 
+# Start battery notifier
+killall -q battery-notify
+(sleep 1 && battery-notify) &
+
 # Start polkit agent
 (sleep 1 && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1) &
 

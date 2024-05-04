@@ -242,7 +242,6 @@ screens = [
                     empty_char="",
                     low_percentage=0.25,
                     show_short_text=False,
-                    notify_below=25,
                 ),
                 widget.Sep(**top_bar_sep),
                 widget.Clock(format="%d/%m/%Y %I:%M:%S %p", **top_bar_text),
