@@ -1,6 +1,6 @@
 # Print help message if tmp file and script exist
 if [ ! -f /tmp/zplugins ] && [ -f "$ZDOTDIR/zplugins.sh" ]; then
-    printf "Install|Update zsh plugins with 'source \$ZDOTDIR/zplugins.sh'\n\n"
+    printf "Install/Update zsh plugins with 'source \$ZDOTDIR/zplugins.sh'\n\n"
     touch /tmp/zplugins
 fi
 

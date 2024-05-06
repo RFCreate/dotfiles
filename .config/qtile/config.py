@@ -252,7 +252,7 @@ screens = [
         bottom=bar.Bar(
             widgets=[
                 widget.CurrentLayoutIcon(scale=0.75),
-                widget.CurrentLayout(fmt="<b>{}</b>", foreground="#ffff00"),
+                widget.CurrentLayout(foreground="#ffff00"),
                 widget.Sep(foreground="#ffffff", padding=6),
                 widget.TaskList(
                     border="#005577",

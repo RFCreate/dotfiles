@@ -1,0 +1,9 @@
+codium --install-extensions eamodio.gitlens
+codium --install-extensions esbenp.prettier-vscode
+codium --install-extensions foxundermoon.shell-format
+codium --install-extensions mads-hartmann.bash-ide-vscode
+codium --install-extensions ms-azuretools.vscode-docker
+codium --install-extensions ms-python.black-formatter
+codium --install-extensions ms-python.pylint
+codium --install-extensions ms-python.python
+codium --install-extensions pkief.material-icon-theme
