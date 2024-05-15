@@ -1,0 +1,17 @@
+[Default Applications]
+application/json=l3afpad.desktop
+application/pdf=org.pwmt.zathura.desktop
+image/gif=gpicview.desktop
+image/jpeg=gpicview.desktop
+image/jpg=gpicview.desktop
+image/png=gpicview.desktop
+image/svg+xml=gpicview.desktop
+image/svg-xml=gpicview.desktop
+inode/directory=pcmanfm.desktop
+inode/x-empty=l3afpad.desktop
+text/csv=l3afpad.desktop
+text/html=l3afpad.desktop
+text/plain=l3afpad.desktop
+text/xml=l3afpad.desktop
+video/mp4=mpv.desktop
+video/x-matroska=mpv.desktop

@@ -190,7 +190,7 @@ widget_defaults = dict(
     padding=3,
 )
 bar_defaults = dict(
-    size=30,
+    size=28,
     border_color="#ffffff",
     background="#2b2b2b",
 )
@@ -222,7 +222,11 @@ screens = [
                 widget.Systray(padding=8),
                 widget.Sep(**top_bar_sep),
                 widget.TextBox("VOL", **top_bar_text),
-                widget.Volume(mute_format="muted {volume}%", mute_foreground="#888888"),
+                widget.Volume(
+                    unmute_format=" {volume}%",
+                    mute_format="󰝟 {volume}%",
+                    mute_foreground="#888888"
+                ),
                 widget.Sep(**top_bar_sep),
                 widget.TextBox("CPU", **top_bar_text),
                 widget.CPU(format="{load_percent:.0f}%"),

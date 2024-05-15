@@ -61,5 +61,5 @@ while true; do
     esac
 
     # Interval to execute
-    sleep 20
+    sleep 15
 done
