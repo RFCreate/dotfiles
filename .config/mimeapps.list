@@ -1,12 +1,12 @@
 [Default Applications]
 application/json=l3afpad.desktop
 application/pdf=org.pwmt.zathura.desktop
-image/gif=gpicview.desktop
-image/jpeg=gpicview.desktop
-image/jpg=gpicview.desktop
-image/png=gpicview.desktop
-image/svg+xml=gpicview.desktop
-image/svg-xml=gpicview.desktop
+image/gif=imv-dir.desktop
+image/jpeg=imv-dir.desktop
+image/jpg=imv-dir.desktop
+image/png=imv-dir.desktop
+image/svg+xml=imv-dir.desktop
+image/svg-xml=imv-dir.desktop
 inode/directory=pcmanfm.desktop
 inode/x-empty=l3afpad.desktop
 text/csv=l3afpad.desktop

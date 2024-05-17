@@ -1,7 +1,6 @@
 [options]
-background=151515
+background = checks
 
 [binds]
-<Escape> = quit
 <plus> = zoom 1
 0 = reset

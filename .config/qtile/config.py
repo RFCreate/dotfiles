@@ -41,6 +41,7 @@ keys = [
     Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Switch to next group"),
     Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Switch to previous group"),
     Key([mod], "0", lazy.screen.toggle_group(), desc="Switch to last group"),
+    Key([mod], "Escape", lazy.screen.toggle_group(), desc="Switch to last group"),
     # Change window state
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
     Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
