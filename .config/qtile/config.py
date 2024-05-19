@@ -24,6 +24,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import os, random
+
+def random_wallpaper():
+    path = "/usr/share/backgrounds/cutefishos"
+    if os.path.isdir(path):
+        wallpaper = random.choice(os.listdir(path))
+        return os.path.join(path, wallpaper)
+
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -126,13 +134,14 @@ keys.extend([
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
         lazy.spawn("volume-notify"), desc="Mute/unmute volume"),
     # Application programs
+    Key(["control", "shift"], "Escape", lazy.spawn("lxtask"), desc="Open task manager"),
     Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
     Key([mod], "w", lazy.spawn("rofi -show window"), desc="Open window switcher"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
     Key([mod], "v", lazy.spawn("clipcat-menu"), desc="Open clipboard history"),
     Key([mod], "e", lazy.spawn("pcmanfm"), desc="Open file manager"),
     Key([mod], "t", lazy.spawn("lxterminal"), desc="Open terminal"),
-    Key(["control", "shift"], "Escape", lazy.spawn("lxtask"), desc="Open task manager"),
+    Key([mod, alt], "l", lazy.spawn("i3lock -c 333333"), desc="Lock screen"),
 ])
 
 # Define workspaces
@@ -272,6 +281,12 @@ screens = [
         ),
     ),
 ]
+
+# Set new wallpaper after every (re)start
+@hook.subscribe.startup_complete
+def change_wallpaper():
+    wallpaper = random_wallpaper()
+    [screen.paint(path=wallpaper, mode="fill") for screen in screens]
 
 bring_front_click = "floating_only"
 follow_mouse_focus = False
