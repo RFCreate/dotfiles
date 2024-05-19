@@ -4,6 +4,9 @@ export PATH="${PATH}:${HOME}/.local/bin"
 # Export variables
 export EDITOR=micro
 
+# Change python history file
+export PYTHON_HISTORY="$HOME/.local/state/python/history"
+
 # Configure git
 if [ ! -f "$HOME/.config/git/config" ]; then
     mkdir -p "$HOME/.config/git"

@@ -21,9 +21,9 @@ autoload -U select-word-style
 select-word-style bash
 
 # History file configuration options
-export HISTSIZE=10000
 export HISTFILE="$HOME/.local/state/zsh/history"
-export SAVEHIST=5000
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 # Add zsh-completions to fpath
 [ -d "$ZDOTDIR/zsh-completions/src" ] && fpath=("$ZDOTDIR/zsh-completions/src" $fpath)
@@ -33,12 +33,12 @@ autoload -Uz compinit
 zmodload -i zsh/complist
 compinit -d "$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
 
-# Check for zsh script and source it
+# Check for script and source it
 source_script() {
     [ -f "$1" ] && source "$1"
 }
 
-# Source zsh config files
+# Source config files
 source_script "$HOME/.config/aliasrc"
 source_script "$ZDOTDIR/.setopt"
 source_script "$ZDOTDIR/.zstyle"
