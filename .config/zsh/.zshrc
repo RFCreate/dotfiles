@@ -11,19 +11,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load zsh modules
-autoload -U colors && colors
-zmodload -i zsh/terminfo
-zmodload -i zsh/datetime
-
-# Change word delimeter to alphanumerics only
-autoload -U select-word-style
-select-word-style bash
-
 # History file configuration options
 export HISTFILE="$HOME/.local/state/zsh/history"
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+# Change word delimeter to alphanumerics only
+autoload -U select-word-style
+select-word-style bash
 
 # Add zsh-completions to fpath
 [ -d "$ZDOTDIR/zsh-completions/src" ] && fpath=("$ZDOTDIR/zsh-completions/src" $fpath)
@@ -38,8 +33,10 @@ source_script() {
     [ -f "$1" ] && source "$1"
 }
 
-# Source config files
+# Load aliases
 source_script "$HOME/.config/aliasrc"
+
+# Source config files
 source_script "$ZDOTDIR/.setopt"
 source_script "$ZDOTDIR/.zstyle"
 source_script "$ZDOTDIR/.bindkey"

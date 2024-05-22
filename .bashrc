@@ -1,3 +1,6 @@
+# Set prompt style
+export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\t \[$(tput setaf 5)\]\w\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
+
 # History file configuration options
 export HISTCONTROL="erasedups:ignorespace"
 export HISTFILE="$HOME/.local/state/bash/history"
@@ -9,12 +12,11 @@ source_script() {
     [ -f "$1" ] && source "$1"
 }
 
-# Source config files
+# Load aliases
 source_script "$HOME/.config/aliasrc"
 
 # Alias completion for dotfiles
-source /usr/share/bash-completion/completions/git
-__git_complete dotfiles __git_main
+source_script /usr/share/bash-completion/completions/git && __git_complete dotfiles __git_main
 
 # Load fzf CTRL-R history search
 export FZF_DEFAULT_OPTS="--height 100% --layout=default --border"

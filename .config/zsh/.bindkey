@@ -1,4 +1,8 @@
+# Set emacs keybindings
 bindkey -e
+
+# Load terminfo database
+zmodload -i zsh/terminfo
 
 # Home key
 bindkey '^[[7~' beginning-of-line
