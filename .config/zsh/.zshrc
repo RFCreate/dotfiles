@@ -81,8 +81,6 @@ setopt autopushd            # Push old directory to the stack
 setopt pushdignoredups      # Ignore duplicates in the stack
 setopt pushdminus           # Use -n to specify a directory in the stack
 setopt alwaystoend          # Move cursor to the end after completion
-setopt automenu             # Use menu completion after second tab
-unsetopt menucomplete       # Disable completion on first tab
 setopt globdots             # Match all files including dotfiles
 setopt extendedhistory      # Save command with timestamp
 setopt histexpiredupsfirst  # Remove duplicates from history file when full
@@ -93,9 +91,7 @@ setopt histignorespace      # Do not save leading spaces to history
 setopt histsavenodups       # Do not save duplicates to history file
 setopt histverify           # Do not execute history expansion
 setopt incappendhistorytime # Save command to history after execution with timestamp
-setopt clobber              # Allow '>' redirection overwrite
 setopt interactivecomments  # Allow comments
-setopt appendcreate         # Allow '>>' file creation
 unsetopt beep               # Disable error beep
 
 zstyle ':completion:*' menu select                                                  # Highlight selection in menu complete
