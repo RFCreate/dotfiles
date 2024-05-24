@@ -13,6 +13,12 @@ export EDITOR=micro
 # Set python history file
 export PYTHON_HISTORY="$HOME/.local/state/python/history"
 
+# Do not wrap lines in systemd commands
+export SYSTEMD_LESS=FRXMK
+
+# Set bat to always use pager
+export BAT_PAGER="less -R"
+
 # Configure git
 git config --global init.defaultBranch main
 git config --global alias.a   'add'

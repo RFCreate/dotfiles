@@ -1,10 +1,19 @@
 {
     "Alt-/": "lua:comment.comment",
+    "Alt-MouseLeft": "MouseMultiCursor",
+    "Alt-d": "DuplicateLine",
+    "Alt-h": "HSplit",
+    "Alt-v": "VSplit",
+    "Ctrl-Delete": "DeleteWordRight",
+    "Ctrl-Down": "ScrollDown",
+    "Ctrl-MouseLeft": "None",
+    "Ctrl-Shift-Down": "SpawnMultiCursorDown",
+    "Ctrl-Shift-End": "SelectToEnd",
+    "Ctrl-Shift-Home": "SelectToStart",
+    "Ctrl-Shift-Up": "SpawnMultiCursorUp",
+    "Ctrl-Underscore": "lua:comment.comment",
+    "Ctrl-Up": "ScrollUp",
+    "Ctrl-d": "SpawnMultiCursor",
     "Ctrl-l": "SelectLine",
-    "CtrlDelete": "DeleteWordRight",
-    "CtrlShiftDown": "SpawnMultiCursorDown",
-    "CtrlShiftEnd": "SelectToEnd",
-    "CtrlShiftHome": "SelectToStart",
-    "CtrlShiftUp": "SpawnMultiCursorUp",
-    "CtrlUnderscore": "lua:comment.comment"
+    "Ctrl-u": "RemoveMultiCursor"
 }
