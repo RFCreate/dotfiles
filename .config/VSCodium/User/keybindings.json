@@ -67,7 +67,7 @@
         "when": "!inSearchEditor && !searchViewletFocus"
     },
     {
-        "key": "ctrl+q",
+        "key": "ctrl+shift+q",
         "command": "workbench.action.terminal.kill",
         "when": "terminalFocus"
     },
