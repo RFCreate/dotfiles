@@ -13,6 +13,10 @@ export EDITOR=micro
 # Set python history file
 export PYTHON_HISTORY="$HOME/.local/state/python/history"
 
+# Set bat as pager for man command
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
+
 # Do not wrap lines in systemd commands
 export SYSTEMD_LESS=FRXMK
 
