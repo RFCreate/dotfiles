@@ -17,6 +17,7 @@ select-word-style bash
 # Load completion module
 autoload -Uz compinit
 zmodload -i zsh/complist
+[ -d "$HOME/.cache/zsh" ] || mkdir -p "$HOME/.cache/zsh"
 compinit -d "$HOME/.cache/zsh/zcompdump-$ZSH_VERSION"
 
 # Check for script and source it
