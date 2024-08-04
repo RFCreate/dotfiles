@@ -2,10 +2,10 @@
 export PATH="${PATH}:${HOME}/.local/bin"
 
 # Set XDG variables
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # Set default editor
 export EDITOR=micro
@@ -24,6 +24,8 @@ export SYSTEMD_LESS=FRXMK
 export BAT_PAGER="less -R"
 
 # Configure git
+mkdir -p "$HOME/.config/git"
+touch "$HOME/.config/git/config"
 git config --global init.defaultBranch main
 git config --global alias.a   'add'
 git config --global alias.aa  'add --all'

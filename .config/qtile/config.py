@@ -112,7 +112,6 @@ mouse = [
     Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
 
-# Application keys
 keys.extend([
     # Screenshot commands
     Key([], "Print", lazy.spawn("maimpick Select"), desc="Save screenshot of selection"),
@@ -122,18 +121,13 @@ keys.extend([
     Key(["control", "shift"], "Print", lazy.spawn("maimpick Copy Window"), desc="Copy screenshot of window"),
     Key(["control", alt], "Print", lazy.spawn("maimpick Copy Screen"), desc="Copy screenshot of screen"),
     # Brightness commands
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q set +5%"),
-        lazy.spawn("brightness-notify"), desc="Raise brightness"),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q set 5%-"),
-        lazy.spawn("brightness-notify"), desc="Lower brightness"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q set +5% && brightness-notify", shell=True)),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q set 5%- && brightness-notify", shell=True)),
     # Volume commands
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
-        lazy.spawn("volume-notify"), desc="Raise volume"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
-        lazy.spawn("volume-notify"), desc="Lower volume"),
-    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
-        lazy.spawn("volume-notify"), desc="Mute/unmute volume"),
-    # Application programs
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5% && volume-notify", shell=True)),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5% && volume-notify", shell=True)),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle && volume-notify", shell=True)),
+    # Application commands
     Key(["control", "shift"], "Escape", lazy.spawn("lxtask"), desc="Open task manager"),
     Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
     Key([mod], "w", lazy.spawn("rofi -show window"), desc="Open window switcher"),

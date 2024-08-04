@@ -11,6 +11,7 @@ if [ -z "$prompt" ]; then
 fi
 
 # File to save screenshot
+[ ! -d "$HOME/Pictures" ] && mkdir -p "$HOME/Pictures"
 file="$HOME/Pictures/Screenshot-$(date +%Y%m%d%H%M%S).png"
 # Command to save screenshot in clipboard
 copy_to_clipboard="xclip -selection clipboard -t image/png"

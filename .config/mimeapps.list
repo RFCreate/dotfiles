@@ -1,6 +1,7 @@
 [Default Applications]
 application/json=l3afpad.desktop
 application/pdf=org.pwmt.zathura.desktop
+application/x-shellscript=l3afpad.desktop
 image/gif=imv-dir.desktop
 image/jpeg=imv-dir.desktop
 image/jpg=imv-dir.desktop
@@ -13,5 +14,6 @@ text/csv=l3afpad.desktop
 text/html=l3afpad.desktop
 text/plain=l3afpad.desktop
 text/xml=l3afpad.desktop
+text/x-shellscript=l3afpad.desktop
 video/mp4=mpv.desktop
 video/x-matroska=mpv.desktop
