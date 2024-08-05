@@ -135,7 +135,6 @@ keys.extend([
     Key([mod], "v", lazy.spawn("clipcat-menu"), desc="Open clipboard history"),
     Key([mod], "e", lazy.spawn("pcmanfm"), desc="Open file manager"),
     Key([mod], "t", lazy.spawn("lxterminal"), desc="Open terminal"),
-    Key([mod, alt], "l", lazy.spawn("i3lock -c 333333"), desc="Lock screen"),
 ])
 
 # Define workspaces

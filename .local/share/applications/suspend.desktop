@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Suspend
+GenericName=Suspend
+Comment=Suspend computer
+Exec=systemctl suspend
+Icon=system-shutdown
+Categories=Utility
+Terminal=false
