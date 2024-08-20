@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Screenshot
-GenericName=Maimpick
+GenericName=maimpick
 Comment=Screenshot picker
 Exec=maimpick
 Icon=applets-screenshooter

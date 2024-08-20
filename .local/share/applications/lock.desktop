@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Lock
-GenericName=Lock
+GenericName=i3lock
 Comment=Lock screen
 Exec=i3lock -c 333333
 Icon=system-lock-screen

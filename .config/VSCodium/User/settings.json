@@ -17,6 +17,12 @@
         "editor.defaultFormatter": "foxundermoon.shell-format",
         "editor.formatOnSave": true
     },
+    "gitlens.telemetry.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java",
+        "editor.formatOnSave": true
+    },
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.suggest.insertMode": "replace",
     "workbench.startupEditor": "none",

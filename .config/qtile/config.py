@@ -130,7 +130,7 @@ keys.extend([
     # Application commands
     Key(["control", "shift"], "Escape", lazy.spawn("lxtask"), desc="Open task manager"),
     Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
-    Key([mod], "w", lazy.spawn("rofi -show window"), desc="Open window switcher"),
+    Key([mod], "w", lazy.spawn("rofi -show window -selected-row 1"), desc="Open window switcher"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
     Key([mod], "v", lazy.spawn("clipcat-menu"), desc="Open clipboard history"),
     Key([mod], "e", lazy.spawn("pcmanfm"), desc="Open file manager"),
