@@ -8,6 +8,10 @@
     "terminal.integrated.commandsToSkipShell": [
         "workbench.action.toggleSidebarVisibility"
     ],
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true

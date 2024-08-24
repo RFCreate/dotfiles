@@ -5,7 +5,7 @@ finder = "rofi"
 line_length = 100
 menu_length = 10
 menu_prompt = "Clipcat"
-extra_arguments = ["-no-show-icons"]
+extra_arguments = ["-no-show-icons", "-i"]
 
 [log]
 emit_journald = true

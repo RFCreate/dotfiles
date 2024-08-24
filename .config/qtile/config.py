@@ -143,10 +143,10 @@ groups = [
     Group("2", label="", matches=[Match(wm_class="lxterminal")]),
     Group("3", label="󰨞", matches=[Match(wm_class="vscodium")]),
     Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
-    Group("5", label="", matches=[Match(wm_class="l3afpad")]),
-    Group("6", label="󰋩", matches=[Match(wm_class="imv")]),
-    Group("7", label="󰕧", matches=[Match(wm_class="mpv")]),
-    Group("8", label="󰿎", matches=[Match(wm_class="shotcut")]),
+    Group("5", label="󰋩", matches=[Match(wm_class="imv")]),
+    Group("6", label="󰕧", matches=[Match(wm_class="mpv")]),
+    Group("7", label="󰿎", matches=[Match(wm_class="shotcut")]),
+    Group("8", label="", matches=[Match(wm_class="keepassxc")]),
     Group("9", label="󰏆", matches=[Match(wm_class="DesktopEditors")]),
 ]
 

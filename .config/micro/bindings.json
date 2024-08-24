@@ -1,9 +1,10 @@
 {
     "Alt-/": "lua:comment.comment",
     "Alt-MouseLeft": "MouseMultiCursor",
-    "Alt-d": "DuplicateLine",
     "Alt-h": "HSplit",
     "Alt-v": "VSplit",
+    "Alt-Shift-Down": "DuplicateLine",
+    "Alt-Shift-Up": "DuplicateLine",
     "Ctrl-Delete": "DeleteWordRight",
     "Ctrl-Down": "ScrollDown",
     "Ctrl-MouseLeft": "None",
