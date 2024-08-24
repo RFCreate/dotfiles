@@ -128,7 +128,7 @@ keys.extend([
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5% && volume-notify", shell=True)),
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle && volume-notify", shell=True)),
     # Application commands
-    Key(["control", "shift"], "Escape", lazy.spawn("lxtask"), desc="Open task manager"),
+    Key(["control", "shift"], "Escape", lazy.spawn("lxterminal -e btop"), desc="Open task manager"),
     Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
     Key([mod], "w", lazy.spawn("rofi -show window -selected-row 1"), desc="Open window switcher"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
