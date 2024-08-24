@@ -25,12 +25,17 @@ export BAT_PAGER="less -R"
 
 # Configure git
 mkdir -p "$HOME/.config/git"
-touch "$HOME/.config/git/config"
+if [ -f "$HOME/.gitconfig" ]; then
+    mv "$HOME/.gitconfig" "$HOME/.config/git/config"
+elif [ ! -f "$HOME/.config/git/config" ]; then
+    touch "$HOME/.config/git/config"
+fi
 git config --global init.defaultBranch main
 git config --global alias.a   'add'
 git config --global alias.aa  'add --all'
 git config --global alias.au  'add --update'
 git config --global alias.c   'commit'
+git config --global alias.ca  'commit -a'
 git config --global alias.cam 'commit -am'
 git config --global alias.co  'checkout'
 git config --global alias.cob 'checkout -b'
