@@ -10,8 +10,8 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # Set default editor
 export EDITOR=micro
 
-# Set python history file
-export PYTHON_HISTORY="$HOME/.local/state/python/history"
+# Set history file of applications
+export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 
 # Set bat as pager for man command
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -22,27 +22,3 @@ export SYSTEMD_LESS=FRXMK
 
 # Set bat to always use pager
 export BAT_PAGER="less -R"
-
-# Configure git
-mkdir -p "$HOME/.config/git"
-if [ -f "$HOME/.gitconfig" ]; then
-    mv "$HOME/.gitconfig" "$HOME/.config/git/config"
-elif [ ! -f "$HOME/.config/git/config" ]; then
-    touch "$HOME/.config/git/config"
-fi
-git config --global init.defaultBranch main
-git config --global alias.a   'add'
-git config --global alias.aa  'add --all'
-git config --global alias.au  'add --update'
-git config --global alias.c   'commit'
-git config --global alias.ca  'commit -a'
-git config --global alias.cam 'commit -am'
-git config --global alias.co  'checkout'
-git config --global alias.cob 'checkout -b'
-git config --global alias.d   'diff'
-git config --global alias.dc  'diff --cached'
-git config --global alias.ds  'diff --stat'
-git config --global alias.pl  'pull'
-git config --global alias.ps  'push'
-git config --global alias.lg  'log --oneline --decorate --graph'
-git config --global alias.s   'status'

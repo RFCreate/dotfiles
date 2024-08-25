@@ -1,0 +1,32 @@
+[user]
+	name = 
+	email = 
+[filter "remove-git-user"]
+	clean = "sed 's/^\\tname = .*/\\tname = /;s/^\\temail = .*/\\temail = /'"
+[init]
+	defaultBranch = main
+[alias]
+	a = add
+	aa = add --all
+	au = add --update
+	c = commit
+	ca = commit -a
+	cam = commit -am
+	co = checkout
+	cob = checkout -b
+	d = diff
+	dc = diff --cached
+	ds = diff --stat
+	dsc = diff --stat --cached
+	dw = diff --word-diff
+	lg = log --oneline --decorate --graph
+	pl = pull
+	ps = push
+	rmc = rm --cached
+	s = status
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
