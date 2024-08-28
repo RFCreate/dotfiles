@@ -42,25 +42,8 @@ mod = "mod4"
 terminal = guess_terminal()
 
 keys = [
-    # Change window in focus
-    Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
-    Key([alt, "shift"], "Tab", lazy.group.prev_window(), desc="Focus previous window"),
-    # Change group in focus
-    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Switch to next group"),
-    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Switch to previous group"),
-    Key([mod], "0", lazy.screen.toggle_group(), desc="Switch to last group"),
-    Key([mod], "Escape", lazy.screen.toggle_group(), desc="Switch to last group"),
-    # Change window state
-    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
-    Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
-    Key([mod], "Up", lazy.window.toggle_floating(), desc="Toggle window floating"),
-    Key([mod], "Down", lazy.window.toggle_minimize(), desc="Toggle window minimize"),
-    # Close active window
-    Key([alt], "F4", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
-    # Toggle between different layouts
-    Key([mod], "space", lazy.next_layout(), desc="Toggle next layout"),
-    Key([mod, "shift"], "space", lazy.prev_layout(), desc="Toggle previous layout"),
+    # A list of available commands that can be bound to keys can be found
+    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -84,6 +67,25 @@ keys = [
         lazy.layout.grow_down().when(when_floating=False), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.window.resize_floating(dw=0, dh=-10).when(when_floating=True),
         lazy.layout.grow_up().when(when_floating=False), desc="Grow window up"),
+    # Change window in focus
+    Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
+    Key([alt, "shift"], "Tab", lazy.group.prev_window(), desc="Focus previous window"),
+    # Change group in focus
+    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Switch to next group"),
+    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Switch to previous group"),
+    Key([mod], "0", lazy.screen.toggle_group(), desc="Switch to last group"),
+    Key([mod], "Escape", lazy.screen.toggle_group(), desc="Switch to last group"),
+    # Change window state
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
+    Key([mod], "Up", lazy.window.toggle_floating(), desc="Toggle window floating"),
+    Key([mod], "Down", lazy.window.toggle_minimize(), desc="Toggle window minimize"),
+    # Close active window
+    Key([alt], "F4", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "w", lazy.window.kill(), desc="Kill focused window"),
+    # Toggle between different layouts
+    Key([mod], "space", lazy.next_layout(), desc="Toggle next layout"),
+    Key([mod, "shift"], "space", lazy.prev_layout(), desc="Toggle previous layout"),
     # Grow or shrink tiled windows
     Key([mod], "plus", lazy.layout.grow()),
     Key([mod], "minus", lazy.layout.shrink()),
@@ -95,21 +97,13 @@ keys = [
     Key([mod, "shift"], "n", lazy.layout.reset(), desc="Reset all window sizes"),
     Key([mod, alt], "f", lazy.layout.flip(), desc="Flip main window position"),
     Key([mod, "shift"], "Return", lazy.layout.swap_main(), desc="Send window to main"),
+    # Open guessed terminal
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between split and unsplit sides of the stack
     Key([mod, alt], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Change qtile state
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-]
-
-mouse = [
-    # Drag window in focus
-    Click([mod], "Button1", lazy.window.bring_to_front()),
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    # Resize window in focus
-    Click([mod, "shift"], "Button1", lazy.window.bring_to_front()),
-    Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
 
 keys.extend([
@@ -137,6 +131,18 @@ keys.extend([
     Key([mod], "t", lazy.spawn("lxterminal"), desc="Open terminal"),
 ])
 
+# Add key bindings to switch VTs in Wayland.
+# We can't check qtile.core.name in default config as it is loaded before qtile is started
+# We therefore defer the check until the key binding is run by using .when(func=...)
+for vt in range(1, 8):
+    keys.append(
+        Key(
+            ["control", "mod1"], f"f{vt}",
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            desc=f"Switch to VT{vt}",
+        )
+    )
+
 # Define workspaces
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")]),
@@ -155,9 +161,9 @@ groups = [
 def group_window_add(group, window):
     group.toscreen()
 
+# Keys to navigate workspaces
 for i in groups:
     keys.extend([
-        # Keys to navigate workspaces
         Key([mod], i.name, lazy.group[i.name].toscreen(toggle=True),
             desc="Switch to group {}".format(i.name)),
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
@@ -167,8 +173,8 @@ for i in groups:
     ])
 
 layouts = [
-    layout.Max(),
     # layout.Columns(),
+    layout.Max(),
     # layout.Stack(),
     # layout.Bsp(),
     # layout.Matrix(),
@@ -181,17 +187,15 @@ layouts = [
     # layout.Zoomy(),
 ]
 
-# Floating window attributes
-floating_layout = layout.Floating(
-    border_focus="#888888", border_normal="#ff0000", border_width=1,
-)
-
-# Default values for widgets and bars
+# Default values for all widgets
 widget_defaults = dict(
     font="monospace",
     fontsize=16,
     padding=3,
 )
+extension_defaults = widget_defaults.copy()
+
+# Default values for bars and specific widgets
 bar_defaults = dict(
     size=28,
     border_color="#ffffff",
@@ -275,23 +279,29 @@ screens = [
     ),
 ]
 
+# Mouse functions
+mouse = [
+    # Drag window in focus
+    Click([mod], "Button1", lazy.window.bring_to_front()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    # Resize window in focus
+    Click([mod, "shift"], "Button1", lazy.window.bring_to_front()),
+    Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+]
+
+follow_mouse_focus = False
+bring_front_click = "floating_only"
+floating_layout = layout.Floating(
+    border_focus="#888888", border_normal="#ff0000", border_width=1,
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class="galculator"),
+    ]
+)
+
 # Set new wallpaper after every (re)start
 @hook.subscribe.startup_complete
 def change_wallpaper():
     wallpaper = random_wallpaper()
     [screen.paint(path=wallpaper, mode="fill") for screen in screens]
-
-bring_front_click = "floating_only"
-follow_mouse_focus = False
-
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", "mod1"], f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
