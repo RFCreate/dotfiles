@@ -156,11 +156,6 @@ groups = [
     Group("9", label="󰏆", matches=[Match(wm_class="DesktopEditors")]),
 ]
 
-# Move to group where window spawn
-@hook.subscribe.group_window_add
-def group_window_add(group, window):
-    group.toscreen()
-
 # Keys to navigate workspaces
 for i in groups:
     keys.extend([
@@ -299,6 +294,17 @@ floating_layout = layout.Floating(
         Match(wm_class="galculator"),
     ]
 )
+
+# Move to group where window spawn
+@hook.subscribe.group_window_add
+def group_window_add(group, window):
+    group.toscreen()
+
+# Revert to last group after all windows close
+@hook.subscribe.group_window_remove
+def group_window_remove(group, window):
+    if not group.windows and group.info().get("screen") is not None:
+        group.toscreen(toggle=True)
 
 # Set new wallpaper after every (re)start
 @hook.subscribe.startup_complete

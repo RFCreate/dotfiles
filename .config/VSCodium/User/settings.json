@@ -8,10 +8,6 @@
     "terminal.integrated.commandsToSkipShell": [
         "workbench.action.toggleSidebarVisibility"
     ],
-    "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true
@@ -23,6 +19,7 @@
     },
     "gitlens.telemetry.enabled": false,
     "redhat.telemetry.enabled": false,
+    "java.completion.matchCase": "off",
     "[java]": {
         "editor.defaultFormatter": "redhat.java",
         "editor.formatOnSave": true
