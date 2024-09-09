@@ -1,0 +1,31 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.minimumContrastRatio": 1,
+    "files.insertFinalNewline": true,
+    "editor.mouseWheelZoom": true,
+    "window.restoreWindows": "none",
+    "terminal.integrated.commandsToSkipShell": [
+        "workbench.action.toggleSidebarVisibility"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
+    "shellformat.flag": "-bn -ci -sr -kp",
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.formatOnSave": true
+    },
+    "gitlens.telemetry.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "java.completion.matchCase": "off",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java",
+        "editor.formatOnSave": true
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.suggest.insertMode": "replace",
+    "workbench.startupEditor": "none",
+    "window.zoomLevel": 1
+}

@@ -147,7 +147,7 @@ for vt in range(1, 8):
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")]),
     Group("2", label="", matches=[Match(wm_class="lxterminal")]),
-    Group("3", label="󰨞", matches=[Match(wm_class="vscodium")]),
+    Group("3", label="󰨞", matches=[Match(wm_class="code"),Match(wm_class="code-oss"),Match(wm_class="vscodium")]),
     Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
     Group("5", label="󰋩", matches=[Match(wm_class="imv")]),
     Group("6", label="󰕧", matches=[Match(wm_class="mpv")]),
