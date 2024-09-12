@@ -147,7 +147,7 @@ for vt in range(1, 8):
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")]),
     Group("2", label="", matches=[Match(wm_class="lxterminal")]),
-    Group("3", label="󰨞", matches=[Match(wm_class="code"),Match(wm_class="code-oss"),Match(wm_class="vscodium")]),
+    Group("3", label="󰨞", matches=[Match(wm_class="code"), Match(wm_class="code-oss"), Match(wm_class="vscodium")]),
     Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
     Group("5", label="󰋩", matches=[Match(wm_class="imv")]),
     Group("6", label="󰕧", matches=[Match(wm_class="mpv")]),
@@ -300,10 +300,12 @@ floating_layout = layout.Floating(
 def group_window_add(group, window):
     group.toscreen()
 
-# Revert to last group after all windows close
+# Revert to previous group after all windows close
+# if group is on screen and previous group has windows
 @hook.subscribe.group_window_remove
 def group_window_remove(group, window):
-    if not group.windows and group.info().get("screen") is not None:
+    if (not group.windows and group.info().get("screen") is not None and
+            group.screen.previous_group and group.screen.previous_group.windows):
         group.toscreen(toggle=True)
 
 # Set new wallpaper after every (re)start
