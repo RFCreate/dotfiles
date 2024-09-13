@@ -71,8 +71,8 @@ keys = [
     Key([alt], "Tab", lazy.group.next_window(), desc="Focus next window"),
     Key([alt, "shift"], "Tab", lazy.group.prev_window(), desc="Focus previous window"),
     # Change group in focus
-    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Switch to next group"),
-    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Switch to previous group"),
+    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True, skip_managed=False), desc="Switch to next group"),
+    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True, skip_managed=False), desc="Switch to previous group"),
     Key([mod], "0", lazy.screen.toggle_group(), desc="Switch to last group"),
     Key([mod], "Escape", lazy.screen.toggle_group(), desc="Switch to last group"),
     # Change window state
@@ -300,13 +300,15 @@ floating_layout = layout.Floating(
 def group_window_add(group, window):
     group.toscreen()
 
-# Revert to previous group after all windows close
-# if group is on screen and previous group has windows
+# When all windows in group close and group is on screen
+# go to previous group if has windows or go to next group with windows
 @hook.subscribe.group_window_remove
 def group_window_remove(group, window):
-    if (not group.windows and group.info().get("screen") is not None and
-            group.screen.previous_group and group.screen.previous_group.windows):
-        group.toscreen(toggle=True)
+    if not group.windows and group.info().get("screen") is not None:
+        if group.screen.previous_group and group.screen.previous_group.windows:
+            group.toscreen(toggle=True)
+        else:
+            group.screen.next_group(skip_empty=True, skip_managed=False)
 
 # Set new wallpaper after every (re)start
 @hook.subscribe.startup_complete
