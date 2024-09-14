@@ -304,7 +304,7 @@ def group_window_add(group, window):
 # go to previous group if has windows or go to next group with windows
 @hook.subscribe.group_window_remove
 def group_window_remove(group, window):
-    if not group.windows and group.info().get("screen") is not None:
+    if not group.windows and group.screen:
         if group.screen.previous_group and group.screen.previous_group.windows:
             group.toscreen(toggle=True)
         else:
