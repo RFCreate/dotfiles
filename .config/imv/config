@@ -2,5 +2,12 @@
 background = checks
 
 [binds]
+<Prior> = prev
+<Next> = next
+<Up> = pan 0 50
+<Down> = pan 0 -50
+<Left> = pan 50 0
+<Right> = pan -50 0
 <plus> = zoom 1
+<minus> = zoom -1
 0 = reset
