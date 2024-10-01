@@ -2,12 +2,11 @@
 background = checks
 
 [binds]
-<Prior> = prev
-<Next> = next
-<Up> = pan 0 50
-<Down> = pan 0 -50
-<Left> = pan 50 0
-<Right> = pan -50 0
+<Up> = flip vertical
+<Down> = flip horizontal
+<Left> = prev
+<Right> = next
 <plus> = zoom 1
 <minus> = zoom -1
 0 = reset
+<Shift+R> = rotate by 90
