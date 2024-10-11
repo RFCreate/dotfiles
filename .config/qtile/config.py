@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os, random
+import os, random, re
 
 def random_wallpaper():
     path = "/usr/share/backgrounds/cutefishos"
@@ -147,7 +147,7 @@ for vt in range(1, 8):
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")]),
     Group("2", label="", matches=[Match(wm_class="lxterminal")]),
-    Group("3", label="󰨞", matches=[Match(wm_class="code"), Match(wm_class="code-oss"), Match(wm_class="vscodium")]),
+    Group("3", label="󰨞", matches=[Match(wm_class=re.compile("code(-oss)?$|codium$"))]),
     Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
     Group("5", label="󰋩", matches=[Match(wm_class="imv")]),
     Group("6", label="󰕧", matches=[Match(wm_class="mpv")]),
@@ -193,8 +193,8 @@ extension_defaults = widget_defaults.copy()
 # Default values for bars and specific widgets
 bar_defaults = dict(
     size=28,
-    border_color="#ffffff",
     background="#2b2b2b",
+    border_color="#ffffff",
 )
 top_bar_sep = dict(
     foreground="#bbbbbb",
@@ -284,8 +284,13 @@ mouse = [
     Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
 
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: list
 follow_mouse_focus = False
 bring_front_click = "floating_only"
+floats_kept_above = True
+cursor_warp = False
+
 floating_layout = layout.Floating(
     border_focus="#888888", border_normal="#ff0000", border_width=1,
     float_rules=[
@@ -294,6 +299,30 @@ floating_layout = layout.Floating(
         Match(wm_class="galculator"),
     ]
 )
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+
+# If things like steam games want to auto-minimize themselves when losing
+# focus, should we respect this or not?
+auto_minimize = True
+
+# When using the Wayland backend, this can be used to configure input devices.
+wl_input_rules = None
+
+# xcursor theme (string or None) and size (integer) for Wayland backend
+wl_xcursor_theme = None
+wl_xcursor_size = 24
+
+# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
+# string besides java UI toolkits; you can see several discussions on the
+# mailing lists, GitHub issues, and other WM documentation that suggest setting
+# this string if your java app doesn't work correctly. We may as well just lie
+# and say that we're a working one by default.
+#
+# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
+# java that happens to be on java's whitelist.
+wmname = "LG3D"
 
 # Move to group where window spawn
 @hook.subscribe.group_window_add
