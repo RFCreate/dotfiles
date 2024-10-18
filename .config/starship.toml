@@ -70,6 +70,7 @@ success_symbol = "[✔](fg:green bg:background)"
 format = "[$symbol]($style)"
 style = "fg:red bg:background"
 pipestatus = true
+pipestatus_separator = "[|](fg:bold gray bg:background)"
 pipestatus_format = "[$pipestatus]($style)"
 
 [c]
