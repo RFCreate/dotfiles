@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of .zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # History file configuration options
 export HISTFILE="$HOME/.local/state/zsh/history"
 export HISTSIZE=10000
@@ -33,9 +26,8 @@ source_script /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source_script /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source_script /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# Load powerlevel10k and source config file
-source_script /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source_script "$ZDOTDIR/.p10k.zsh"
+# Load custom prompt
+eval "$(starship init zsh)"
 
 # Load fzf CTRL-R history search
 export FZF_DEFAULT_OPTS="--height 100% --layout=default --border"

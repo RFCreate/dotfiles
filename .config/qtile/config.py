@@ -218,7 +218,7 @@ screens = [
                     this_current_screen_border="#ffdd66",
                     this_screen_border="#ffdd66",
                     padding=4,
-                    fontsize=18,
+                    fontsize=20,
                 ),
                 widget.Spacer(),
                 widget.Systray(padding=8),
@@ -290,7 +290,6 @@ follow_mouse_focus = False
 bring_front_click = "floating_only"
 floats_kept_above = True
 cursor_warp = False
-
 floating_layout = layout.Floating(
     border_focus="#888888", border_normal="#ff0000", border_width=1,
     float_rules=[
