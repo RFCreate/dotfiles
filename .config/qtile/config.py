@@ -148,9 +148,9 @@ groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")]),
     Group("2", label="", matches=[Match(wm_class="lxterminal")]),
     Group("3", label="󰨞", matches=[Match(wm_class=re.compile("code(-oss)?$|codium$"))]),
-    Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
+    Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
     Group("5", label="󰋩", matches=[Match(wm_class="imv")]),
-    Group("6", label="󰕧", matches=[Match(wm_class="mpv")]),
+    Group("6", label="", matches=[Match(wm_class="mpv")]),
     Group("7", label="󰿎", matches=[Match(wm_class="shotcut")]),
     Group("8", label="", matches=[Match(wm_class="keepassxc")]),
     Group("9", label="󰏆", matches=[Match(wm_class="DesktopEditors")]),
@@ -218,14 +218,14 @@ screens = [
                     this_current_screen_border="#ffdd66",
                     this_screen_border="#ffdd66",
                     padding=4,
-                    fontsize=20,
+                    fontsize=24,
                 ),
                 widget.Spacer(),
                 widget.Systray(padding=8),
                 widget.Sep(**top_bar_sep),
                 widget.TextBox("VOL", **top_bar_text),
                 widget.Volume(
-                    unmute_format=" {volume}%",
+                    unmute_format="󰕾 {volume}%",
                     mute_format="󰝟 {volume}%",
                     mute_foreground="#888888"
                 ),
@@ -242,9 +242,9 @@ screens = [
                 widget.TextBox("BAT", **top_bar_text),
                 widget.Battery(
                     format="{percent:2.0%} {char}",
-                    full_char="",
-                    charge_char="",
-                    discharge_char="",
+                    full_char="󰁹",
+                    charge_char="󰁞",
+                    discharge_char="󰁆",
                     empty_char="",
                     low_percentage=0.25,
                     show_short_text=False,
@@ -274,12 +274,10 @@ screens = [
     ),
 ]
 
-# Mouse functions
+# Mouse functions to drag and resize
 mouse = [
-    # Drag window in focus
     Click([mod], "Button1", lazy.window.bring_to_front()),
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    # Resize window in focus
     Click([mod, "shift"], "Button1", lazy.window.bring_to_front()),
     Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
