@@ -46,9 +46,9 @@ style = "fg:red bg:background"
 
 [git_status]
 conflicted = "[~$count](fg:red bg:background)"
-ahead = "[⇡$count](fg:green bg:background)"
-behind = "[⇣$count](fg:green bg:background)"
-diverged = "[⇡$ahead_count⇣$behind_count](fg:green bg:background)"
+ahead = "⇡$count"
+behind = "⇣$count"
+diverged = "⇡$ahead_count⇣$behind_count"
 up_to_date = ""
 untracked = "[?$count](fg:blue bg:background)"
 stashed = "[*$count](fg:green bg:background)"
@@ -57,7 +57,7 @@ staged = "+$count"
 renamed = "»$count"
 deleted = "x$count"
 typechanged = "t$count"
-format = "[( $ahead_behind)( $all_status)]($style)"
+format = "[( $ahead_behind)](fg:green bg:background)[( $all_status)]($style)"
 style = "fg:orange bg:background"
 
 [fill]
