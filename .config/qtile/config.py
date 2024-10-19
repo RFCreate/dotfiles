@@ -284,12 +284,12 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = False
+follow_mouse_focus = "click_or_drag_only"
 bring_front_click = "floating_only"
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
-    border_focus="#888888", border_normal="#ff0000", border_width=1,
+    border_focus="#ff0000", border_normal="#000000", border_width=1,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,

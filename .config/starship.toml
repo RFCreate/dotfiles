@@ -1,5 +1,6 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
+command_timeout = 1000
 palette = "color"
 add_newline = false
 format = """
@@ -11,8 +12,6 @@ $git_branch$git_commit$git_state$git_status\
 $fill\
 [](fg:background)[ ](bg:background)\
 $status\
-$c\
-$java\
 $python\
 $cmd_duration\
 $time\
@@ -73,20 +72,13 @@ pipestatus = true
 pipestatus_separator = "[|](fg:bold gray bg:background)"
 pipestatus_format = "[$pipestatus]($style)"
 
-[c]
-symbol = ""
-format = "[  ](fg:gray bg:background)[$symbol]($style)"
-style = "fg:#88bbdd bg:background"
-
-[java]
-symbol = ""
-format = "[  ](fg:gray bg:background)[$symbol]($style)"
-style = "fg:bold yellow bg:background"
-
 [python]
 symbol = ""
-format = "[  ](fg:gray bg:background)[$symbol]($style)"
+format = "[  ](fg:gray bg:background)[($version )$symbol]($style)"
 style = "fg:yellow bg:background"
+version_format = "v$major.$minor"
+detect_extensions = []
+detect_files = []
 
 [cmd_duration]
 format = "[  ](fg:gray bg:background)[$duration ]($style)"
