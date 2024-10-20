@@ -74,11 +74,9 @@ pipestatus_format = "[$pipestatus]($style)"
 
 [python]
 symbol = ""
-format = "[  ](fg:gray bg:background)[($version )$symbol]($style)"
+format = "[  ](fg:gray bg:background)[($virtualenv )$symbol]($style)"
 style = "fg:yellow bg:background"
-version_format = "v$major.$minor"
 detect_extensions = []
-detect_files = []
 
 [cmd_duration]
 format = "[  ](fg:gray bg:background)[$duration ]($style)"

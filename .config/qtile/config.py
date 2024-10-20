@@ -153,7 +153,7 @@ groups = [
     Group("6", label="", matches=[Match(wm_class="mpv")]),
     Group("7", label="󰿎", matches=[Match(wm_class="shotcut")]),
     Group("8", label="", matches=[Match(wm_class="keepassxc")]),
-    Group("9", label="󰏆", matches=[Match(wm_class="DesktopEditors")]),
+    Group("9", label="󰏆", matches=[Match(wm_class=re.compile(".*office"))]),
 ]
 
 # Keys to navigate workspaces
