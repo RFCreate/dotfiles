@@ -25,13 +25,6 @@
 # SOFTWARE.
 
 import os, random, re
-
-def random_wallpaper():
-    path = "/usr/share/backgrounds/cutefishos"
-    if os.path.isdir(path):
-        wallpaper = random.choice(os.listdir(path))
-        return os.path.join(path, wallpaper)
-
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -350,5 +343,7 @@ def group_window_remove(group, window):
 # Set new wallpaper after every (re)start
 @hook.subscribe.startup_complete
 def change_wallpaper():
-    wallpaper = random_wallpaper()
-    [screen.paint(path=wallpaper, mode="fill") for screen in screens]
+    path = "/usr/share/backgrounds/cutefishos"
+    if os.path.isdir(path):
+        wallpaper = os.path.join(path, random.choice(os.listdir(path)))
+        [screen.set_wallpaper(path=wallpaper, mode="fill") for screen in screens]
