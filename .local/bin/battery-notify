@@ -1,34 +1,51 @@
 #!/bin/sh
 
-# Set battery levels
 WARNING_LEVEL=25
 CRITICAL_LEVEL=10
 
-# Set file to save battery status
-battery_file=/tmp/battery-notify
+# Get first battery occurance
+for battery_dir in /sys/class/power_supply/BAT?; do break; done
+# Exit if match is not found
+echo "$battery_dir" | grep -Fq "?" && exit 1
+
+last_battery_status="Unknown"
+battery_status="Unknown"
+battery_capacity="0"
+urgency="normal"
+last_icon=""
+icon=""
 
 # Send notification
 send_notification() {
-    notify-send "$status battery: ${capacity}%" -i "${icon}" -r 10001 -u "${urgency}"
+    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}"
 }
 
-# Write status to file
-write_status() {
-    echo "$status" > "$battery_file"
+# Save current status
+save_status() {
+    last_battery_status="$battery_status"
 }
 
-# Do nothing if status is the same as file
-compare_status() {
-    [ ! -f "$battery_file" ] || [ "$status" != "$(cat "$battery_file")" ]
+# Save current icon
+save_icon() {
+    last_icon="$icon"
 }
 
-# Set icon name based on battery capacity
-# And set notification urgency level
-get_icon() {
-    if [ "$capacity" -gt "$WARNING_LEVEL" ]; then
+# Check if last and current status are different
+is_diff_status() {
+    [ "$battery_status" != "$last_battery_status" ]
+}
+
+# Check if last and current icon are different
+is_diff_icon() {
+    [ "$icon" != "$last_icon" ]
+}
+
+# Set icon and urgency based on battery capacity
+get_icon_and_urgency() {
+    if [ "$battery_capacity" -gt "$WARNING_LEVEL" ]; then
         icon="battery-good"
         urgency="normal"
-    elif [ "$capacity" -gt "$CRITICAL_LEVEL" ]; then
+    elif [ "$battery_capacity" -gt "$CRITICAL_LEVEL" ]; then
         icon="battery-low"
         urgency="critical"
     else
@@ -37,29 +54,46 @@ get_icon() {
     fi
 }
 
+# Get battery capacity of first occurrence
+get_battery_capacity() {
+    battery_capacity="$(cat "$battery_dir/capacity")"
+}
+
+# Get battery status of first occurrence
+get_battery_status() {
+    battery_status="$(cat "$battery_dir/status")"
+}
+
 # Run script in the background
 while true; do
-    # Get battery capacity of first occurrence
-    capacity="$(cat /sys/class/power_supply/BAT?/capacity | head -n 1)"
-    # Get battery status of first occurrence
-    status="$(cat /sys/class/power_supply/BAT?/status | head -n 1)"
-
+    get_battery_status
     # Match battery status
-    case $status in
-        Full)
-            # Change icon and urgency level for status
-            compare_status && icon="battery-full-charged" urgency="low" send_notification && write_status
+    case "$battery_status" in
+        "Full")
+            if is_diff_status; then
+                get_battery_capacity
+                icon="battery-full-charged"
+                urgency="low"
+                send_notification && save_status
+            fi
             ;;
-        Charging)
-            # Append status to icon and change urgency level for status
-            compare_status && get_icon && icon="${icon}-charging" urgency="normal" send_notification && write_status
+        "Charging")
+            if is_diff_status; then
+                get_battery_capacity
+                icon="battery-good-charging"
+                urgency="normal"
+                send_notification && save_status
+            fi
             ;;
-        Discharging)
-            # Set status as icon to send notifications at different battery levels
-            get_icon && status="$icon" compare_status && send_notification && status="$icon" write_status
+        "Discharging")
+            get_battery_capacity
+            get_icon_and_urgency
+            if is_diff_icon; then
+                send_notification && save_status && save_icon
+            fi
             ;;
     esac
 
     # Interval to execute
-    sleep 15
+    sleep 10
 done
