@@ -1,11 +1,18 @@
 #!/bin/sh
 
+# Run command based on parameter
+case "$1" in
+    "up") pactl set-sink-volume @DEFAULT_SINK@ +5% || exit 1 ;;
+    "down") pactl set-sink-volume @DEFAULT_SINK@ -5% || exit 1 ;;
+    "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle || exit 1 ;;
+esac
+
 # Get volume percent
 volume="$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -n 1 | tr -d %)"
-# Get if volume is muted
-mute="$([ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ] && printf " (muted)")"
+# Get mute volume state
+[ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ] && mute=" (muted)"
 
-#Set notification icon
+# Set notification icon
 if [ -n "$mute" ]; then
     icon="audio-volume-muted"
 else

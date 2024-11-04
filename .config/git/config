@@ -20,6 +20,7 @@
 	ds = diff --stat
 	dsc = diff --stat --cached
 	dw = diff --word-diff
+	dwc = diff --word-diff --cached
 	lg = log --oneline --decorate --graph
 	pl = pull
 	ps = push

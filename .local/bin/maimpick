@@ -14,12 +14,12 @@ fi
 FILE="$HOME/Pictures/Screenshot-$(date +%Y%m%d%H%M%S).png"
 [ ! -d "$(dirname "$FILE")" ] && mkdir -p "$(dirname "$FILE")"
 # Command to save screenshot in clipboard
-copy_to_clipboard="xclip -selection clipboard -t image/png"
+CLIPBOARD="xclip -selection clipboard -t image/png"
 
 # Send a notification either for copy or save
 send_notification() {
     case "$prompt" in
-        "Copy"*) notify-send "Screenshot" "Copy to clipboard" -i edit-paste -t 5000 -u normal ;;
+        "Copy"*) notify-send "Screenshot" "Copied to clipboard" -i edit-paste -t 5000 -u normal ;;
         *) notify-send "Screenshot" "Saved to $FILE" -i folder-pictures -t 5000 -u normal ;;
     esac
 }
@@ -32,7 +32,7 @@ case "$prompt" in
     "Select"*)      ${SCREENSHOT} -u --select "$FILE" && send_notification ;;
     "Window"*)      ${SCREENSHOT} -i "$(xdotool getactivewindow)" "$FILE" && send_notification ;;
     "Screen"*)      ${SCREENSHOT} "$FILE" && send_notification ;;
-    "Copy Select"*) ${SCREENSHOT} -u --select | ${copy_to_clipboard} && send_notification ;;
-    "Copy Window"*) ${SCREENSHOT} -i "$(xdotool getactivewindow)" | ${copy_to_clipboard} && send_notification ;;
-    "Copy Screen"*) ${SCREENSHOT} | ${copy_to_clipboard} && send_notification ;;
+    "Copy Select"*) ${SCREENSHOT} -u --select | ${CLIPBOARD} && send_notification ;;
+    "Copy Window"*) ${SCREENSHOT} -i "$(xdotool getactivewindow)" | ${CLIPBOARD} && send_notification ;;
+    "Copy Screen"*) ${SCREENSHOT} | ${CLIPBOARD} && send_notification ;;
 esac

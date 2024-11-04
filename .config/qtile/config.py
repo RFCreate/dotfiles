@@ -108,12 +108,12 @@ keys.extend([
     Key(["control", "shift"], "Print", lazy.spawn("maimpick Copy Window"), desc="Copy screenshot of window"),
     Key(["control", alt], "Print", lazy.spawn("maimpick Copy Screen"), desc="Copy screenshot of screen"),
     # Brightness commands
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -q set +5% && brightness-notify", shell=True)),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -q set 5%- && brightness-notify", shell=True)),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightness-notify up"), desc="Raise brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightness-notify down"), desc="Lower brightness"),
     # Volume commands
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5% && volume-notify", shell=True)),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5% && volume-notify", shell=True)),
-    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle && volume-notify", shell=True)),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("volume-notify up"), desc="Raise volume"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("volume-notify down"), desc="Lower volume"),
+    Key([], "XF86AudioMute", lazy.spawn("volume-notify mute"), desc="Mute/unmute volume"),
     # Application commands
     Key(["control", "shift"], "Escape", lazy.spawn("lxterminal -e btop"), desc="Open task manager"),
     Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),

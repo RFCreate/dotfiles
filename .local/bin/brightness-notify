@@ -1,8 +1,14 @@
 #!/bin/sh
 
+# Run command based on parameter
+case "$1" in
+    "up") brightnessctl -q set +5% || exit 1 ;;
+    "down") brightnessctl -q set 5%- || exit 1 ;;
+esac
+
 # Get brightness percent
 brightness="$(brightnessctl | grep -o '[0-9]*%')"
-#Set notification icon
+# Set notification icon
 icon="display-brightness"
 
 # Send notification
