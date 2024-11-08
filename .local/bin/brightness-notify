@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run command based on parameter
+# Run command based on argument
 case "$1" in
     "up") brightnessctl -q set +5% || exit 1 ;;
     "down") brightnessctl -q set 5%- || exit 1 ;;

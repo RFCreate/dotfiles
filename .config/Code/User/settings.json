@@ -9,7 +9,7 @@
         "workbench.action.toggleSidebarVisibility"
     ],
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true
     },
     "shellformat.flag": "-bn -ci -sr -kp",
