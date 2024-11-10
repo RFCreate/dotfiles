@@ -26,6 +26,7 @@
 	ps = push
 	rmc = rm --cached
 	s = status
+	ss = status --short
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
