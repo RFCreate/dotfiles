@@ -143,7 +143,7 @@ groups = [
     Group("3", label="󰨞", matches=[Match(wm_class=re.compile("code(-oss)?$|codium$"))]),
     Group("4", label="", matches=[Match(wm_class="pcmanfm")]),
     Group("5", label="󰋩", matches=[Match(wm_class=re.compile("imv$|Gimp"))]),
-    Group("6", label="", matches=[Match(wm_class=re.compile("mpv$|Shotcut$"))]),
+    Group("6", label="󰿎", matches=[Match(wm_class=re.compile("mpv$|Shotcut$"))]),
     Group("7", label="󰈙", matches=[Match(wm_class="org.pwmt.zathura")]),
     Group("8", label="", matches=[Match(wm_class="KeePassXC")]),
     Group("9", label="󰏆", matches=[Match(wm_class=re.compile(".*office"))]),

@@ -12,9 +12,11 @@
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true
     },
-    "shellformat.flag": "-bn -ci -sr -kp",
+    "bashIde.shfmt.binaryNextLine": true,
+    "bashIde.shfmt.caseIndent": true,
+    "bashIde.shfmt.spaceRedirects": true,
     "[shellscript]": {
-        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode",
         "editor.formatOnSave": true
     },
     "gitlens.telemetry.enabled": false,
