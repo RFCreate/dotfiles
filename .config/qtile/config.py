@@ -326,19 +326,20 @@ wl_xcursor_size = 24
 wmname = "LG3D"
 
 # Move to group where window spawn
-@hook.subscribe.group_window_add
-def group_window_add(group, window):
-    group.toscreen()
+@hook.subscribe.client_managed
+def client_managed(client):
+    client.group.toscreen()
 
-# When all windows in group close and group is on screen
-# go to previous group if has windows or go to next group with windows
-@hook.subscribe.group_window_remove
-def group_window_remove(group, window):
-    if not group.windows and group.screen:
-        if group.screen.previous_group and group.screen.previous_group.windows:
-            group.toscreen(toggle=True)
+# Move to previous group if has windows or to next group with windows
+# when group where window lived is on screen and has no windows
+@hook.subscribe.client_killed
+def client_killed(client):
+    group, screen = client.group, client.group.screen
+    if screen and not group.windows:
+        if screen.previous_group and screen.previous_group.windows:
+            screen.toggle_group()
         else:
-            group.screen.next_group(skip_empty=True, skip_managed=False)
+            screen.next_group(skip_empty=True, skip_managed=False)
 
 # Set new wallpaper after every (re)start
 @hook.subscribe.startup_complete
