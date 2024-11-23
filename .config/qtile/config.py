@@ -328,23 +328,29 @@ wmname = "LG3D"
 # Move to group where window spawn
 @hook.subscribe.client_managed
 def client_managed(client):
+    if client.group is None:
+        return
     client.group.toscreen()
 
 # Move to previous group if has windows or to next group with windows
 # when group where window lived is on screen and has no windows
 @hook.subscribe.client_killed
 def client_killed(client):
+    if client.group is None:
+        return
     group, screen = client.group, client.group.screen
-    if screen and not group.windows:
-        if screen.previous_group and screen.previous_group.windows:
-            screen.toggle_group()
-        else:
-            screen.next_group(skip_empty=True, skip_managed=False)
+    if not screen or group.windows:
+        return
+    if screen.previous_group and screen.previous_group.windows:
+        screen.toggle_group()
+    else:
+        screen.next_group(skip_empty=True, skip_managed=False)
 
 # Set new wallpaper after every (re)start
 @hook.subscribe.startup_complete
 def change_wallpaper():
     path = "/usr/share/backgrounds/cutefishos"
-    if os.path.isdir(path):
-        wallpaper = os.path.join(path, random.choice(os.listdir(path)))
-        [screen.set_wallpaper(path=wallpaper, mode="fill") for screen in screens]
+    if not os.path.isdir(path):
+        return
+    wallpaper = os.path.join(path, random.choice(os.listdir(path)))
+    [screen.set_wallpaper(path=wallpaper, mode="fill") for screen in screens]
