@@ -341,8 +341,9 @@ def client_killed(client):
     group, screen = client.group, client.group.screen
     if not screen or group.windows:
         return
-    if screen.previous_group and screen.previous_group.windows:
-        screen.toggle_group()
+    previous_group = screen.previous_group
+    if previous_group and previous_group.windows:
+        screen.set_group(previous_group)
     else:
         screen.next_group(skip_empty=True, skip_managed=False)
 
