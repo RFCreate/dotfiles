@@ -1,12 +1,16 @@
 {
     "Alt-/": "lua:comment.comment",
-    "Alt-MouseLeft": "MouseMultiCursor",
     "Alt-h": "HSplit",
-    "Alt-v": "VSplit",
+    "Alt-MouseLeft": "MouseMultiCursor",
     "Alt-Shift-Down": "DuplicateLine",
     "Alt-Shift-Up": "DuplicateLine",
+    "Alt-v": "VSplit",
+    "Alt-z": "command:set softwrap off,command:set wordwrap off",
+    "Alt-Z": "command:set softwrap on,command:set wordwrap on",
     "Ctrl-Delete": "DeleteWordRight",
     "Ctrl-Down": "ScrollDown",
+    "Ctrl-d": "SpawnMultiCursor",
+    "Ctrl-l": "SelectLine",
     "Ctrl-MouseLeft": "None",
     "Ctrl-Shift-Down": "SpawnMultiCursorDown",
     "Ctrl-Shift-End": "SelectToEnd",
@@ -14,7 +18,5 @@
     "Ctrl-Shift-Up": "SpawnMultiCursorUp",
     "Ctrl-Underscore": "lua:comment.comment",
     "Ctrl-Up": "ScrollUp",
-    "Ctrl-d": "SpawnMultiCursor",
-    "Ctrl-l": "SelectLine",
     "Ctrl-u": "RemoveMultiCursor"
 }
