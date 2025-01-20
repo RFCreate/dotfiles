@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os, random, re
+import os, re
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -347,11 +347,10 @@ def client_killed(client):
     else:
         screen.next_group(skip_empty=True, skip_managed=False)
 
-# Set new wallpaper after every (re)start
-@hook.subscribe.startup_complete
+# Set wallpaper on every start
+@hook.subscribe.startup_once
 def change_wallpaper():
-    path = "/usr/share/backgrounds/cutefishos"
-    if not os.path.isdir(path):
+    wallpaper = os.path.expanduser("~/.config/wallpapers/archtv.png")
+    if not os.path.isfile(wallpaper):
         return
-    wallpaper = os.path.join(path, random.choice(os.listdir(path)))
     [screen.set_wallpaper(path=wallpaper, mode="fill") for screen in screens]
