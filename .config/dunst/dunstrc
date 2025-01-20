@@ -1,5 +1,5 @@
 [global]
-    font = Monospace 10
+    font = Monospace 11
 
     ### Icons ###
     enable_recursive_icon_lookup = true
@@ -8,18 +8,18 @@
 
 [urgency_low]
     timeout = 5
-    background = "#191311"
-    foreground = "#5B8234"
-    frame_color = "#5B8234"
+    background = "#111111"
+    foreground = "#66dd66"
+    frame_color = "#66dd66"
 
 [urgency_normal]
     timeout = 10
-    background = "#191311"
-    foreground = "#3B7C87"
-    frame_color = "#3B7C87"
+    background = "#111111"
+    foreground = "#0099dd"
+    frame_color = "#0099dd"
 
 [urgency_critical]
     timeout = 0
-    background = "#191311"
-    foreground = "#B7472A"
-    frame_color = "#B7472A"
+    background = "#111111"
+    foreground = "#dd0000"
+    frame_color = "#dd0000"
