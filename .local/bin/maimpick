@@ -20,7 +20,7 @@ CLIPBOARD="xclip -selection clipboard -t image/png"
 send_notification() {
     case "$prompt" in
         "Copy"*) notify-send "Screenshot" "Copied to clipboard" -i edit-paste -t 5000 -u normal ;;
-        *) notify-send "Screenshot" "Saved to $FILE" -i folder-pictures -t 5000 -u normal ;;
+        *) notify-send "Screenshot" "Saved to $FILE" -i emblem-photos -t 5000 -u normal ;;
     esac
 }
 

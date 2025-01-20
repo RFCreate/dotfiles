@@ -9,7 +9,7 @@ esac
 # Get brightness percent
 brightness="$(brightnessctl | grep -o '[0-9]*%')"
 # Set notification icon
-icon="display-brightness"
+icon="video-display"
 
 # Send notification
 notify-send "Brightness: ${brightness}" -h int:value:"${brightness}" -i "${icon}" -r 10002 -t 2000 -u normal

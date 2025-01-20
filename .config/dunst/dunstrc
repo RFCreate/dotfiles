@@ -3,7 +3,7 @@
 
     ### Icons ###
     enable_recursive_icon_lookup = true
-    icon_theme = HighContrast
+    icon_theme = Adwaita
     icon_position = left
 
 [urgency_low]
