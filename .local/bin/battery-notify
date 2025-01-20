@@ -72,7 +72,7 @@ while true; do
         "Full")
             if is_diff_status; then
                 get_battery_capacity
-                icon="battery-full-charged"
+                icon="battery-full"
                 urgency="low"
                 send_notification && save_status
             fi
