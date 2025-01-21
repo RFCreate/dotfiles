@@ -1,7 +1,7 @@
 #!/bin/sh
 
 WARNING_LEVEL=25
-CRITICAL_LEVEL=10
+CRITICAL_LEVEL=15
 
 # Get first battery occurance
 for battery_dir in /sys/class/power_supply/BAT?; do break; done
@@ -40,18 +40,21 @@ is_diff_icon() {
     [ "$icon" != "$last_icon" ]
 }
 
-# Set icon and urgency based on battery capacity
-get_icon_and_urgency() {
-    if [ "$battery_capacity" -gt "$WARNING_LEVEL" ]; then
-        icon="battery-good"
-        urgency="normal"
-    elif [ "$battery_capacity" -gt "$CRITICAL_LEVEL" ]; then
-        icon="battery-low"
-        urgency="critical"
-    else
-        icon="battery-caution"
-        urgency="critical"
-    fi
+# Set icon based on battery capacity
+get_icon() {
+    [ "$battery_capacity" -gt "$WARNING_LEVEL" ] \
+        && icon="battery-good" \
+        && return
+    [ "$battery_capacity" -gt "$CRITICAL_LEVEL" ] \
+        && icon="battery-low" \
+        || icon="battery-caution"
+}
+
+# Set urgency based on battery capacity
+get_urgency() {
+    [ "$battery_capacity" -gt "$WARNING_LEVEL" ] \
+        && urgency="normal" \
+        || urgency="critical"
 }
 
 # Get battery capacity of first occurrence
@@ -80,15 +83,17 @@ while true; do
         "Charging")
             if is_diff_status; then
                 get_battery_capacity
-                icon="battery-good-charging"
+                get_icon
+                icon="${icon}-charging"
                 urgency="normal"
                 send_notification && save_status
             fi
             ;;
         "Discharging")
             get_battery_capacity
-            get_icon_and_urgency
+            get_icon
             if is_diff_icon; then
+                get_urgency
                 send_notification && save_status && save_icon
             fi
             ;;

@@ -1,4 +1,5 @@
 {
+    "editor.linkedEditing": true,
     "workbench.iconTheme": "material-icon-theme",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.minimumContrastRatio": 1,
