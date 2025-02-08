@@ -220,7 +220,7 @@ screens = [
                 widget.Volume(
                     unmute_format="󰕾 {volume}%",
                     mute_format="󰝟 {volume}%",
-                    mute_foreground="#888888"
+                    mute_foreground="#888888",
                 ),
                 widget.Sep(**top_bar_sep),
                 widget.TextBox("CPU", **top_bar_text),
@@ -258,7 +258,7 @@ screens = [
                     highlight_method="block",
                     theme_mode="fallback",
                     unfocused_border="#444444",
-                    font="sans"
+                    font="sans",
                 ),
             ],
             border_width=[1, 0, 0, 0],
@@ -302,12 +302,12 @@ from libqtile.backend.wayland import InputConfig
 wl_input_rules = {
     "type:keyboard": InputConfig(
         kb_layout="latam",
-        kb_variant="deadtilde"
+        kb_variant="deadtilde",
     ),
     "type:touchpad": InputConfig(
         natural_scroll=True,
         pointer_accel=0.25,
-        tap=True
+        tap=True,
     ),
 }
 
