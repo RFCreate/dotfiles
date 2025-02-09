@@ -2,6 +2,7 @@
 application/json=micro.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/sql=micro.desktop
+application/x-desktop=micro.desktop
 application/x-shellscript=micro.desktop
 application/x-trash=micro.desktop
 image/gif=imv-dir.desktop
