@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Source .xprofile started with startx
 [ -f ~/.xprofile ] && . ~/.xprofile
 
