@@ -17,7 +17,8 @@ icon=""
 
 # Send notification
 send_notification() {
-    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}"
+    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}" \
+        || exit 1
 }
 
 # Save current status

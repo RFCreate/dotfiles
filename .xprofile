@@ -35,5 +35,4 @@ xss-lock --transfer-sleep-lock -- i3lock -c 333333 --nofork &
 (sleep 1 && nm-applet) &
 
 # Start battery notifier
-killall -q battery-notify
 (sleep 1 && battery-notify) &
