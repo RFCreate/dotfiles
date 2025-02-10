@@ -328,7 +328,7 @@ wmname = "LG3D"
 # Move to group where window spawn
 @hook.subscribe.client_managed
 def client_managed(client):
-    if client.group is None:
+    if not hasattr(client, "group") or client.group is None:
         return
     client.group.toscreen()
 
@@ -336,7 +336,7 @@ def client_managed(client):
 # when group where window lived is on screen and has no windows
 @hook.subscribe.client_killed
 def client_killed(client):
-    if client.group is None:
+    if not hasattr(client, "group") or client.group is None:
         return
     group, screen = client.group, client.group.screen
     if not screen or group.windows:
