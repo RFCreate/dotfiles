@@ -1,4 +1,3 @@
-server_endpoint = "/run/user/1000/clipcat/grpc.sock"
 finder = "rofi"
 
 [rofi]
