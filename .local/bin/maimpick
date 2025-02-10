@@ -29,9 +29,9 @@ set -o pipefail
 
 # Run a screenshot command based on user input
 case "$prompt" in
-    "Select"*)      ${SCREENSHOT} -u --select "$FILE" && send_notification ;;
-    "Window"*)      ${SCREENSHOT} -i "$(xdotool getactivewindow)" "$FILE" && send_notification ;;
-    "Screen"*)      ${SCREENSHOT} "$FILE" && send_notification ;;
+    "Select"*) ${SCREENSHOT} -u --select "$FILE" && send_notification ;;
+    "Window"*) ${SCREENSHOT} -i "$(xdotool getactivewindow)" "$FILE" && send_notification ;;
+    "Screen"*) ${SCREENSHOT} "$FILE" && send_notification ;;
     "Copy Select"*) ${SCREENSHOT} -u --select | ${CLIPBOARD} && send_notification ;;
     "Copy Window"*) ${SCREENSHOT} -i "$(xdotool getactivewindow)" | ${CLIPBOARD} && send_notification ;;
     "Copy Screen"*) ${SCREENSHOT} | ${CLIPBOARD} && send_notification ;;
