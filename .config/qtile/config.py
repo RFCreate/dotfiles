@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os, re
+import os, random, re
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -350,7 +350,10 @@ def client_killed(client):
 # Set wallpaper on every start
 @hook.subscribe.startup_once
 def change_wallpaper():
-    wallpaper = os.path.expanduser("~/.config/wallpapers/archtv.png")
-    if not os.path.isfile(wallpaper):
+    try:
+        path = os.path.expanduser("~/.config/wallpapers")
+        wallpaper = os.path.join(path, random.choice(os.listdir(path)))
+        assert os.path.isfile(wallpaper)
+    except:
         return
     [screen.set_wallpaper(path=wallpaper, mode="fill") for screen in screens]
