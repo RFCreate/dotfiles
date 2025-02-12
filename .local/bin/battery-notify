@@ -15,9 +15,9 @@ urgency="normal"
 last_icon=""
 icon=""
 
-# Send notification
+# Send notification and exit if notification daemon is not running
 send_notification() {
-    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}"
+    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}" || exit 1
 }
 
 # Save current status
@@ -67,8 +67,11 @@ get_battery_status() {
     battery_status="$(cat "$battery_dir/status")"
 }
 
-# Run script in the background
-while dunstctl debug > /dev/null; do
+# Get parent process
+parentID=$PPID
+
+# Run script in the background while parent is active
+while [ -d "/proc/$parentID" ]; do
     # Update battery status
     get_battery_status
 
