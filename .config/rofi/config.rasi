@@ -5,6 +5,7 @@ listview {
 }
 
 configuration {
+  font: "monospace 12";
   display-drun: "Launcher";
   drun {
     fallback-icon: "application-x-generic";

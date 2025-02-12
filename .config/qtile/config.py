@@ -119,7 +119,7 @@ keys.extend([
     Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
     Key([mod], "w", lazy.spawn("rofi -show window -selected-row 1"), desc="Open window switcher"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
-    Key([mod], "v", lazy.spawn("clipcat-menu"), desc="Open clipboard history"),
+    Key([mod], "v", lazy.spawn("rofi -no-show-icons -modi 'Clipboard:greenclip print' -show Clipboard"), desc="Open clipboard history"),
     Key([mod], "e", lazy.spawn("pcmanfm"), desc="Open file manager"),
     Key([mod], "t", lazy.spawn("lxterminal"), desc="Open terminal"),
 ])
