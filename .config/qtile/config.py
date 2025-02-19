@@ -100,13 +100,6 @@ keys = [
 ]
 
 keys.extend([
-    # Screenshot commands
-    Key([], "Print", lazy.spawn("maimpick Select"), desc="Save screenshot of selection"),
-    Key(["shift"], "Print", lazy.spawn("maimpick Window"), desc="Save screenshot of window"),
-    Key([alt], "Print", lazy.spawn("maimpick Screen"), desc="Save screenshot of screen"),
-    Key(["control"], "Print", lazy.spawn("maimpick Copy Select"), desc="Copy screenshot of selection"),
-    Key(["control", "shift"], "Print", lazy.spawn("maimpick Copy Window"), desc="Copy screenshot of window"),
-    Key(["control", alt], "Print", lazy.spawn("maimpick Copy Screen"), desc="Copy screenshot of screen"),
     # Brightness commands
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightness-notify up"), desc="Raise brightness"),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightness-notify down"), desc="Lower brightness"),
@@ -114,14 +107,21 @@ keys.extend([
     Key([], "XF86AudioRaiseVolume", lazy.spawn("volume-notify up"), desc="Raise volume"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("volume-notify down"), desc="Lower volume"),
     Key([], "XF86AudioMute", lazy.spawn("volume-notify mute"), desc="Mute/unmute volume"),
+    # Screenshot commands
+    Key([], "Print", lazy.spawn("maimpick Select"), desc="Save screenshot of selection"),
+    Key(["shift"], "Print", lazy.spawn("maimpick Window"), desc="Save screenshot of window"),
+    Key([alt], "Print", lazy.spawn("maimpick Screen"), desc="Save screenshot of screen"),
+    Key(["control"], "Print", lazy.spawn("maimpick Copy Select"), desc="Copy screenshot of selection"),
+    Key(["control", "shift"], "Print", lazy.spawn("maimpick Copy Window"), desc="Copy screenshot of window"),
+    Key(["control", alt], "Print", lazy.spawn("maimpick Copy Screen"), desc="Copy screenshot of screen"),
     # Application commands
     Key(["control", "shift"], "Escape", lazy.spawn("lxterminal -e btop"), desc="Open task manager"),
-    Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
-    Key([mod], "w", lazy.spawn("rofi -show window -selected-row 1"), desc="Open window switcher"),
-    Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
-    Key([mod], "v", lazy.spawn("rofi -no-show-icons -modi 'Clipboard:greenclip print' -show Clipboard"), desc="Open clipboard history"),
     Key([mod], "e", lazy.spawn("pcmanfm"), desc="Open file manager"),
     Key([mod], "t", lazy.spawn("lxterminal"), desc="Open terminal"),
+    Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
+    Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
+    Key([mod], "w", lazy.spawn("rofi -show window -selected-row 1"), desc="Open window switcher"),
+    Key([mod], "v", lazy.spawn("rofi -no-show-icons -modi 'Clipboard:greenclip print' -show Clipboard"), desc="Open clipboard history"),
 ])
 
 # Add key bindings to switch VTs in Wayland.
