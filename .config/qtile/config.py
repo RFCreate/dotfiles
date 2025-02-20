@@ -121,7 +121,7 @@ keys.extend([
     Key([mod], "q", lazy.spawn("rofi -show drun"), desc="Open program launcher"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Open command launcher"),
     Key([mod], "w", lazy.spawn("rofi -show window -selected-row 1"), desc="Open window switcher"),
-    Key([mod], "v", lazy.spawn("rofi -no-show-icons -modi 'Clipboard:greenclip print' -show Clipboard"), desc="Open clipboard history"),
+    Key([mod], "v", lazy.spawn("rofi -modi ':greenclip print' -show  -no-show-icons"), desc="Open clipboard history"),
 ])
 
 # Add key bindings to switch VTs in Wayland.
