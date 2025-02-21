@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Exit if it is not xorg
-if [ -z "$DISPLAY" ]; then
-    return
+# Exit if session is wayland
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    exit
 fi
 
 # Set keyboard layout
@@ -20,19 +20,19 @@ xset s on && xset s 300
 xss-lock --transfer-sleep-lock -- i3lock -c 333333 --nofork &
 
 # Start polkit agent
-(sleep 1 && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1) &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Start notification daemon
-(sleep 1 && dunst) &
+dunst &
 
 # Start clipboard manager
-(sleep 1 && greenclip daemon) &
+greenclip daemon &
 
 # Start colour temperature adjustment
-(sleep 1 && redshift) &
+redshift &
 
 # Start network manager tray icon
-(sleep 1 && nm-applet) &
+nm-applet &
 
 # Start battery notifier
-(sleep 1 && battery-notify) &
+battery-notify &

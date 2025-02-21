@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os, random, re
+import os, random, re, subprocess
 from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -357,3 +357,10 @@ def change_wallpaper():
     except:
         return
     [screen.set_wallpaper(path=wallpaper, mode="fill") for screen in screens]
+
+# Autostart programs
+@hook.subscribe.startup_once
+def autostart():
+    script = os.path.expanduser("~/.config/autostart.sh")
+    if os.access(script, os.X_OK):
+        subprocess.run([script])
