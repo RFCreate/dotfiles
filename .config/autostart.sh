@@ -5,6 +5,10 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
     exit
 fi
 
+# Import environment variables into systemd user session and dbus
+systemctl --user import-environment DISPLAY XAUTHORITY
+dbus-update-activation-environment DISPLAY XAUTHORITY
+
 # Set keyboard layout
 setxkbmap -layout latam -variant deadtilde
 
