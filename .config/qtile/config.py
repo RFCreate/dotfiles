@@ -221,6 +221,7 @@ screens = [
                     unmute_format="󰕾 {volume}%",
                     mute_format="󰝟 {volume}%",
                     mute_foreground="#888888",
+                    volume_app="lxterminal -e pulsemixer",
                 ),
                 widget.Sep(**top_bar_sep),
                 widget.TextBox("CPU", **top_bar_text),
