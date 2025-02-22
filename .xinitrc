@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Source .xprofile started with startx
-[ -f ~/.xprofile ] && . ~/.xprofile
+# Source ~/.xprofile used with startx
+[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
 
 # Start window manager
 exec qtile start

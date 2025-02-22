@@ -1,2 +1,2 @@
 # Source ~/.profile
-source "$HOME/.profile"
+[ -f "$HOME/.profile" ] && . "$HOME/.profile"
