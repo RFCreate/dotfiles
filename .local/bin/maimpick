@@ -35,4 +35,5 @@ case "$prompt" in
     "Copy Select"*) ${SCREENSHOT} -u --select | ${CLIPBOARD} && send_notification ;;
     "Copy Window"*) ${SCREENSHOT} -i "$(xdotool getactivewindow)" | ${CLIPBOARD} && send_notification ;;
     "Copy Screen"*) ${SCREENSHOT} | ${CLIPBOARD} && send_notification ;;
+    *) exit 1 ;;
 esac
