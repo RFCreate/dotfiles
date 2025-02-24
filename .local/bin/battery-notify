@@ -78,12 +78,8 @@ get_battery_status() {
 
 # Run script in the background
 while true; do
-    # Exit if call to notification service fails
-    is_notification_running || exit 1
-
     # Update battery status
     get_battery_status
-
     # Match battery status
     case "$battery_status" in
         "Full")
@@ -112,7 +108,8 @@ while true; do
             fi
             ;;
     esac
-
-    # Interval to execute
+    # Exit if call to notification service fails
+    is_notification_running || exit 1
+    # Wait interval
     sleep 10
 done
