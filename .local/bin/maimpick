@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-MENU="rofi -dmenu -l 6 -i -no-show-icons"
+MENU="rofi -dmenu -i -l 6 -p Screenshot -no-show-icons"
 SCREENSHOT="maim -q"
 
 # Check if script is run with an argument
 prompt=$*
 if [ -z "$prompt" ]; then
     # If not, give prompt to user
-    prompt="$(printf 'Select\t[Print]\nWindow\t[Shift+Print]\nScreen\t[Alt+Print]\nCopy Select\t[Ctrl+Print]\nCopy Window\t[Ctrl+Shift+Print]\nCopy Screen\t[Ctrl+Alt+Print]' | ${MENU} -p "Take screenshot")"
+    prompt="$(printf 'Select\t[Print]\nWindow\t[Shift+Print]\nScreen\t[Alt+Print]\nCopy Select\t[Ctrl+Print]\nCopy Window\t[Ctrl+Shift+Print]\nCopy Screen\t[Ctrl+Alt+Print]' | ${MENU})"
 fi
 
 # File to save screenshot
