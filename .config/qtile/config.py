@@ -111,9 +111,9 @@ keys.extend([
     Key([], "Print", lazy.spawn("maimpick Select"), desc="Save screenshot of selection"),
     Key(["shift"], "Print", lazy.spawn("maimpick Window"), desc="Save screenshot of window"),
     Key([alt], "Print", lazy.spawn("maimpick Screen"), desc="Save screenshot of screen"),
-    Key(["control"], "Print", lazy.spawn("maimpick Copy Select"), desc="Copy screenshot of selection"),
-    Key(["control", "shift"], "Print", lazy.spawn("maimpick Copy Window"), desc="Copy screenshot of window"),
-    Key(["control", alt], "Print", lazy.spawn("maimpick Copy Screen"), desc="Copy screenshot of screen"),
+    Key(["control"], "Print", lazy.spawn("maimpick Copy_Select"), desc="Copy screenshot of selection"),
+    Key(["control", "shift"], "Print", lazy.spawn("maimpick Copy_Window"), desc="Copy screenshot of window"),
+    Key(["control", alt], "Print", lazy.spawn("maimpick Copy_Screen"), desc="Copy screenshot of screen"),
     # Application commands
     Key(["control", "shift"], "Escape", lazy.spawn("lxterminal -e btop"), desc="Open task manager"),
     Key([mod], "e", lazy.spawn("pcmanfm"), desc="Open file manager"),

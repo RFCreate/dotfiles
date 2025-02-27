@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Check if script is run with an argument
-prompt=$*
+prompt="$1"
 if [ -z "$prompt" ]; then
     # Define menu launcher
-    MENU="rofi -dmenu -i -l 6 -p Screenshot -no-show-icons"
+    MENU="rofi -dmenu -i -l 6 -p Screenshot -no-show-icons -no-custom"
     # Prompt user and exit if empty
-    prompt="$(printf 'Select\nWindow\nScreen\nCopy Select\nCopy Window\nCopy Screen' | ${MENU})"
+    prompt="$(printf 'Select\nWindow\nScreen\nCopy_Select\nCopy_Window\nCopy_Screen' | ${MENU})"
     [ -z "$prompt" ] && exit 1
 fi
 
@@ -32,11 +32,11 @@ set -o pipefail
 
 # Run a screenshot command based on user input
 case "$prompt" in
-    "Select"*) eval "${SCREENSHOT_SELECT} '${FILE}' && ${NOTIFICATION}" ;;
-    "Window"*) eval "${SCREENSHOT_WINDOW} '${FILE}' && ${NOTIFICATION}" ;;
-    "Screen"*) eval "${SCREENSHOT_SCREEN} '${FILE}' && ${NOTIFICATION}" ;;
-    "Copy Select"*) eval "${SCREENSHOT_SELECT} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
-    "Copy Window"*) eval "${SCREENSHOT_WINDOW} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
-    "Copy Screen"*) eval "${SCREENSHOT_SCREEN} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
+    Select) eval "${SCREENSHOT_SELECT} '${FILE}' && ${NOTIFICATION}" ;;
+    Window) eval "${SCREENSHOT_WINDOW} '${FILE}' && ${NOTIFICATION}" ;;
+    Screen) eval "${SCREENSHOT_SCREEN} '${FILE}' && ${NOTIFICATION}" ;;
+    Copy_Select) eval "${SCREENSHOT_SELECT} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
+    Copy_Window) eval "${SCREENSHOT_WINDOW} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
+    Copy_Screen) eval "${SCREENSHOT_SCREEN} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
     *) exit 1 ;;
 esac
