@@ -1,39 +1,42 @@
 #!/usr/bin/env bash
 
-MENU="rofi -dmenu -i -l 6 -p Screenshot -no-show-icons"
-SCREENSHOT="maim -q"
-
 # Check if script is run with an argument
 prompt=$*
 if [ -z "$prompt" ]; then
-    # If not, give prompt to user
-    prompt="$(printf 'Select\t[Print]\nWindow\t[Shift+Print]\nScreen\t[Alt+Print]\nCopy Select\t[Ctrl+Print]\nCopy Window\t[Ctrl+Shift+Print]\nCopy Screen\t[Ctrl+Alt+Print]' | ${MENU})"
+    # Define menu launcher
+    MENU="rofi -dmenu -i -l 6 -p Screenshot -no-show-icons"
+    # Prompt user and exit if empty
+    prompt="$(printf 'Select\nWindow\nScreen\nCopy Select\nCopy Window\nCopy Screen' | ${MENU})"
+    [ -z "$prompt" ] && exit 1
 fi
 
-# File to save screenshot
-FILE="$HOME/Pictures/Screenshot-$(date +%Y%m%d%H%M%S).png"
-[ ! -d "$(dirname "$FILE")" ] && mkdir -p "$(dirname "$FILE")"
-# Command to save screenshot in clipboard
-CLIPBOARD="xclip -selection clipboard -t image/png"
+SCREENSHOT_SELECT="maim -q -u --select"
+SCREENSHOT_WINDOW="maim -q -u --window \$(xdotool getactivewindow)"
+SCREENSHOT_SCREEN="maim -q -u"
 
-# Send a notification either for copy or save
-send_notification() {
-    case "$prompt" in
-        "Copy"*) notify-send "Screenshot" "Copied to clipboard" -i edit-paste -t 5000 -u normal ;;
-        *) notify-send "Screenshot" "Saved to $FILE" -i emblem-photos -t 5000 -u normal ;;
-    esac
-}
+# Define variables based on prompt
+case "$prompt" in
+    "Copy"*)
+        CLIPBOARD="xclip -selection clipboard -t image/png"
+        NOTIFICATION="notify-send 'Screenshot' 'Copied to clipboard' -i edit-paste -t 5000 -u normal"
+        ;;
+    *)
+        FILE="$HOME/Pictures/$(date +%Y%m%d%H%M%S).png"
+        [ ! -d "$(dirname "$FILE")" ] && mkdir -p "$(dirname "$FILE")"
+        NOTIFICATION="notify-send 'Screenshot' 'Saved to ${FILE/$HOME/\~}' -i emblem-photos -t 5000 -u normal"
+        ;;
+esac
 
 # Prevent errors from maim being masked by xclip
 set -o pipefail
 
 # Run a screenshot command based on user input
 case "$prompt" in
-    "Select"*) ${SCREENSHOT} -u --select "$FILE" && send_notification ;;
-    "Window"*) ${SCREENSHOT} -i "$(xdotool getactivewindow)" "$FILE" && send_notification ;;
-    "Screen"*) ${SCREENSHOT} "$FILE" && send_notification ;;
-    "Copy Select"*) ${SCREENSHOT} -u --select | ${CLIPBOARD} && send_notification ;;
-    "Copy Window"*) ${SCREENSHOT} -i "$(xdotool getactivewindow)" | ${CLIPBOARD} && send_notification ;;
-    "Copy Screen"*) ${SCREENSHOT} | ${CLIPBOARD} && send_notification ;;
+    "Select"*) eval "${SCREENSHOT_SELECT} '${FILE}' && ${NOTIFICATION}" ;;
+    "Window"*) eval "${SCREENSHOT_WINDOW} '${FILE}' && ${NOTIFICATION}" ;;
+    "Screen"*) eval "${SCREENSHOT_SCREEN} '${FILE}' && ${NOTIFICATION}" ;;
+    "Copy Select"*) eval "${SCREENSHOT_SELECT} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
+    "Copy Window"*) eval "${SCREENSHOT_WINDOW} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
+    "Copy Screen"*) eval "${SCREENSHOT_SCREEN} | ${CLIPBOARD} && ${NOTIFICATION}" ;;
     *) exit 1 ;;
 esac
