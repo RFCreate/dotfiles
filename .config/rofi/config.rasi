@@ -6,17 +6,17 @@ listview {
 
 configuration {
   font: "monospace 12";
-  display-drun: "Launcher";
   drun {
+    display-name: "Launcher";
     fallback-icon: "application-x-generic";
   }
-  display-run: "Command";
   run {
+    display-name: "Command";
     fallback-icon: "application-x-executable";
   }
-  display-window: "Switch";
   window-format: "{c}   {w}   {t}";
   window {
+    display-name: "Switch";
     fallback-icon: "application-x-generic";
   }
   modes: "drun,window,run";
@@ -24,5 +24,5 @@ configuration {
   icon-theme: "hicolor";
   sort: false;
   sorting-method: "fzf";
-  kb-cancel: "Escape,Super_L+q,Super_L+Q,Super_L+v,Super_L+V,Super_L+w,Super_L+W,Super_L+r,Super_L+R";
+  kb-cancel: "Escape,Super+q,Super+Q,Super+v,Super+V,Super+w,Super+W,Super+r,Super+R";
 }
