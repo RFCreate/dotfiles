@@ -18,6 +18,7 @@ configuration {
   window {
     display-name: "Switch";
     fallback-icon: "application-x-generic";
+    hide-active-window: true;
   }
   modes: "drun,window,run";
   show-icons: true;
