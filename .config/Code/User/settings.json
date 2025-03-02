@@ -1,5 +1,6 @@
 {
     "editor.linkedEditing": true,
+    "telemetry.telemetryLevel": "off",
     "workbench.iconTheme": "material-icon-theme",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.minimumContrastRatio": 1,
