@@ -9,16 +9,6 @@ fi
 systemctl --user import-environment DISPLAY XAUTHORITY
 dbus-update-activation-environment DISPLAY XAUTHORITY
 
-# Set keyboard layout
-setxkbmap -layout latam -variant deadtilde
-
-# Set touchpad options
-for i in $(xinput list | grep -i "touchpad" | perl -n -e'/id=(\d+)/ && print "$1\n"'); do
-    xinput set-prop "$i" "libinput Accel Speed" 0.25
-    xinput set-prop "$i" "libinput Natural Scrolling Enabled" 1
-    xinput set-prop "$i" "libinput Tapping Enabled" 1
-done
-
 # Start screenlocker and lock after 5 minutes
 xset s on && xset s 300
 xss-lock --transfer-sleep-lock -- i3lock -c 333333 --nofork &
@@ -40,3 +30,13 @@ nm-applet &
 
 # Start battery notifier
 battery-notify &
+
+# Set keyboard layout
+setxkbmap -layout latam -variant deadtilde
+
+# Set touchpad options
+for i in $(xinput list | grep -i "touchpad" | perl -n -e'/id=(\d+)/ && print "$1\n"'); do
+    xinput set-prop "$i" "libinput Accel Speed" 0.25
+    xinput set-prop "$i" "libinput Natural Scrolling Enabled" 1
+    xinput set-prop "$i" "libinput Tapping Enabled" 1
+done
