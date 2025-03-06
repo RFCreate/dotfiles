@@ -2,7 +2,9 @@
 application/json=micro.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/sql=micro.desktop
+application/vnd.efi.iso=xarchiver.desktop
 application/x-desktop=micro.desktop
+application/x-iso9660-image=xarchiver.desktop
 application/x-shellscript=micro.desktop
 application/x-trash=micro.desktop
 image/gif=imv-dir.desktop

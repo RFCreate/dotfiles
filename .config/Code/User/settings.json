@@ -1,5 +1,6 @@
 {
     "editor.linkedEditing": true,
+    "git.terminalAuthentication": false,
     "telemetry.telemetryLevel": "off",
     "workbench.iconTheme": "material-icon-theme",
     "terminal.integrated.defaultProfile.linux": "zsh",
@@ -21,8 +22,6 @@
         "editor.defaultFormatter": "mads-hartmann.bash-ide-vscode",
         "editor.formatOnSave": true
     },
-    "gitlens.telemetry.enabled": false,
-    "redhat.telemetry.enabled": false,
     "java.completion.matchCase": "off",
     "[java]": {
         "editor.defaultFormatter": "redhat.java",
