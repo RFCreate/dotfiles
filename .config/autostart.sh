@@ -31,6 +31,9 @@ nm-applet &
 # Start battery notifier
 battery-notify &
 
+# Activate numlock
+numlockx &
+
 # Set keyboard layout
 setxkbmap -layout latam -variant deadtilde
 
