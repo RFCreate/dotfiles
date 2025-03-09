@@ -3,6 +3,9 @@
 	email = 
 [filter "remove-git-user"]
 	clean = "sed 's/^\\tname = .*/\\tname = /;s/^\\temail = .*/\\temail = /'"
+[filter "remove-home-user"]
+	clean = "sed \"s|$HOME|\\$HOME|\""
+	smudge = "sed \"s|\\$HOME|$HOME|\""
 [init]
 	defaultBranch = main
 [alias]
