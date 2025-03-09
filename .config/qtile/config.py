@@ -299,18 +299,22 @@ reconfigure_screens = True
 auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
-from libqtile.backend.wayland import InputConfig
-wl_input_rules = {
-    "type:keyboard": InputConfig(
-        kb_layout="latam",
-        kb_variant="deadtilde",
-    ),
-    "type:touchpad": InputConfig(
-        natural_scroll=True,
-        pointer_accel=0.25,
-        tap=True,
-    ),
-}
+wl_input_rules = None
+try:
+    from libqtile.backend.wayland import InputConfig
+    wl_input_rules = {
+        "type:keyboard": InputConfig(
+            kb_layout="latam",
+            kb_variant="deadtilde",
+        ),
+        "type:touchpad": InputConfig(
+            natural_scroll=True,
+            pointer_accel=0.25,
+            tap=True,
+        ),
+    }
+except ImportError:
+    pass
 
 # xcursor theme (string or None) and size (integer) for Wayland backend
 wl_xcursor_theme = None
