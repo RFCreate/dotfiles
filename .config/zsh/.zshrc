@@ -1,7 +1,12 @@
 # History file configuration options
-export HISTFILE="$HOME/.local/state/zsh/history"
-export HISTSIZE=10000
-export SAVEHIST=10000
+HISTFILE="$HOME/.local/state/zsh/history"
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Set window title to last command
+function preexec () {
+    builtin print -n -- "\e]0;$1\a"
+}
 
 # Change word delimeter to alphanumerics only
 autoload -U select-word-style

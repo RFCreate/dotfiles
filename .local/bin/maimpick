@@ -23,7 +23,7 @@ case "$prompt" in
     *)
         FILE="$HOME/Pictures/$(date +%Y%m%d%H%M%S).png"
         [ ! -d "$(dirname "$FILE")" ] && mkdir -p "$(dirname "$FILE")"
-        NOTIFICATION="notify-send 'Screenshot' 'Saved to ${FILE/$HOME/\~}' -i emblem-photos -t 5000 -u normal"
+        NOTIFICATION="notify-send 'Screenshot' 'Saved to ${FILE/#$HOME/\~}' -i emblem-photos -t 5000 -u normal"
         ;;
 esac
 

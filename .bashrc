@@ -1,11 +1,15 @@
-# Set prompt style
-export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\t \[$(tput setaf 5)\]\w\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-
 # History file configuration options
-export HISTCONTROL="erasedups:ignorespace"
-export HISTFILE="$HOME/.local/state/bash/history"
-export HISTFILESIZE=10000
-export HISTSIZE=10000
+HISTCONTROL="erasedups:ignorespace"
+HISTFILE="$HOME/.local/state/bash/history"
+HISTFILESIZE=10000
+HISTSIZE=10000
+
+# Set window title to last command
+PS0='\[\e]0;$(history 1 | sed "s/^\\s*[0-9]*\\s*//g")\a\]'
+# Do not reset the title after command finish
+PROMPT_COMMAND=''
+# Set primary prompt style
+PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\t \[$(tput setaf 5)\]\w\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
 # Check for script and source it
 source_script() {
