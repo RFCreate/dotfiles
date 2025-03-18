@@ -5,7 +5,7 @@ SAVEHIST=10000
 
 # Set window title to last command
 function preexec () {
-    builtin print -n -- "\e]0;$1\a"
+    builtin print -n -- "\e]2;$1\a"
 }
 
 # Change word delimeter to alphanumerics only

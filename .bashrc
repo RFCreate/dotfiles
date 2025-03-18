@@ -5,7 +5,7 @@ HISTFILESIZE=10000
 HISTSIZE=10000
 
 # Set window title to last command
-PS0='\[\e]0;$(history 1 | sed "s/^\\s*[0-9]*\\s*//g")\a\]'
+PS0='\[\e]2;$(history 1 | sed "s/^\\s*[0-9]*\\s*//g")\a\]'
 # Do not reset the title after command finish
 PROMPT_COMMAND=''
 # Set primary prompt style
