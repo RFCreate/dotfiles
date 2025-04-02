@@ -33,13 +33,3 @@ battery-notify &
 
 # Activate numlock
 numlockx &
-
-# Set keyboard layout
-setxkbmap -layout latam -variant deadtilde
-
-# Set touchpad options
-for i in $(xinput list | grep -i "touchpad" | perl -n -e'/id=(\d+)/ && print "$1\n"'); do
-    xinput set-prop "$i" "libinput Accel Speed" 0.25
-    xinput set-prop "$i" "libinput Natural Scrolling Enabled" 1
-    xinput set-prop "$i" "libinput Tapping Enabled" 1
-done
