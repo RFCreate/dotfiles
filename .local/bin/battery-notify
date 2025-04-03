@@ -15,18 +15,9 @@ urgency="normal"
 last_icon=""
 icon=""
 
-# Check if notification service is running
-is_notification_running() {
-    gdbus call --session \
-        --dest org.freedesktop.Notifications \
-        --object-path /org/freedesktop/Notifications \
-        --method org.freedesktop.Notifications.GetServerInformation \
-        > /dev/null 2>&1
-}
-
 # Send notification
 send_notification() {
-    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}"
+    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}" || exit 1
 }
 
 # Save current status
@@ -108,8 +99,6 @@ while true; do
             fi
             ;;
     esac
-    # Exit if call to notification service fails
-    is_notification_running || exit 1
     # Wait interval
     sleep 10
 done
