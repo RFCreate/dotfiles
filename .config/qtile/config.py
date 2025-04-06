@@ -70,7 +70,6 @@ keys = [
     Key([mod], "Escape", lazy.screen.toggle_group(), desc="Switch to last group"),
     # Change window state
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle window fullscreen"),
-    Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle window floating"),
     Key([mod], "Up", lazy.window.toggle_floating(), desc="Toggle window floating"),
     Key([mod], "Down", lazy.window.toggle_minimize(), desc="Toggle window minimize"),
     # Close active window
@@ -85,15 +84,15 @@ keys = [
     Key([mod, "shift"], "plus", lazy.layout.grow_main()),
     Key([mod, "shift"], "minus", lazy.layout.shrink_main()),
     # Change tiled window state
-    Key([mod, "control"], "plus", lazy.layout.maximize(), desc="Grow tiled window to max size"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset secondary window sizes"),
-    Key([mod, "shift"], "n", lazy.layout.reset(), desc="Reset all window sizes"),
-    Key([mod, alt], "f", lazy.layout.flip(), desc="Flip main window position"),
-    Key([mod, "shift"], "Return", lazy.layout.swap_main(), desc="Send window to main"),
+    Key([mod, "shift"], "m", lazy.layout.maximize(), desc="Grow tiled window to max size"),
+    Key([mod, "shift"], "n", lazy.layout.normalize(), desc="Reset secondary window sizes"),
+    Key([mod, "shift"], "r", lazy.layout.reset(), desc="Reset all window sizes"),
+    Key([mod, "shift"], "f", lazy.layout.flip(), desc="Flip main window position"),
+    Key([mod, "shift"], "s", lazy.layout.swap_main(), desc="Send window to main"),
     # Open guessed terminal
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between split and unsplit sides of the stack
-    Key([mod, alt], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
+    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle split sides of stack"),
     # Change qtile state
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
