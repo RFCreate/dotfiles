@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Source ~/.xprofile used with startx
+# Source ~/.xprofile when using startx
 [ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
 
 # Start window manager

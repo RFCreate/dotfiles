@@ -5,6 +5,9 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
     exit
 fi
 
+# Source ~/.xprofile in case it was missed
+[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
+
 # Import environment variables into systemd user session and dbus
 systemctl --user import-environment DISPLAY XAUTHORITY
 dbus-update-activation-environment DISPLAY XAUTHORITY
