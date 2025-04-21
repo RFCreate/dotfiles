@@ -1,16 +1,21 @@
 #!/bin/sh
 
+# Remove wpctl warnings
+export WIREPLUMBER_DEBUG=0
+
 # Run command based on argument
 case "$1" in
-    "up") pactl set-sink-volume @DEFAULT_SINK@ +5% || exit 1 ;;
-    "down") pactl set-sink-volume @DEFAULT_SINK@ -5% || exit 1 ;;
-    "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle || exit 1 ;;
+    "up") wpctl set-volume @DEFAULT_SINK@ 5%+ || exit 1 ;;
+    "down") wpctl set-volume @DEFAULT_SINK@ 5%- || exit 1 ;;
+    "mute") wpctl set-mute @DEFAULT_SINK@ toggle || exit 1 ;;
 esac
 
-# Get volume percent
-volume="$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -n 1 | tr -d %)"
-# Get mute volume state
-[ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" = "yes" ] && mute=" (muted)"
+# Get audio information
+WPCTL="$(wpctl get-volume @DEFAULT_SINK@)"
+# Get volume value
+volume="$(echo "$WPCTL" | grep -o '[0-9]\.[0-9][0-9]' | sed 's/0*\.//')"
+# Get mute state
+echo "$WPCTL" | grep -q 'MUTED' && mute=" (muted)"
 
 # Set notification icon
 if [ -n "$mute" ]; then
