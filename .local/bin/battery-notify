@@ -15,9 +15,12 @@ urgency="normal"
 last_icon=""
 icon=""
 
+# Get unique id for notification replacement
+notify_id="$(basename "$0" | sum | cut -d ' ' -f1)"
+
 # Send notification
 send_notification() {
-    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r 10001 -u "${urgency}" || exit 1
+    notify-send "${battery_status} battery: ${battery_capacity}%" -i "${icon}" -r "${notify_id}" -u "${urgency}" || exit 1
 }
 
 # Save current status

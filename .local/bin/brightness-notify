@@ -11,5 +11,8 @@ brightness="$(brightnessctl | grep -o '[0-9]*%')"
 # Set notification icon
 icon="video-display"
 
+# Get unique id for notification replacement
+notify_id="$(basename "$0" | sum | cut -d ' ' -f1)"
+
 # Send notification
-notify-send "Brightness: ${brightness}" -h int:value:"${brightness}" -i "${icon}" -r 10002 -t 2000 -u normal
+notify-send "Brightness: ${brightness}" -h int:value:"${brightness}" -i "${icon}" -r "${notify_id}" -t 2000 -u normal

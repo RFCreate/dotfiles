@@ -30,5 +30,8 @@ else
     fi
 fi
 
+# Get unique id for notification replacement
+notify_id="$(basename "$0" | sum | cut -d ' ' -f1)"
+
 # Send notification
-notify-send "Volume: ${volume}%${mute}" -h int:value:"${volume}" -i "${icon}" -r 10003 -t 2000 -u normal
+notify-send "Volume: ${volume}%${mute}" -h int:value:"${volume}" -i "${icon}" -r "${notify_id}" -t 2000 -u normal
