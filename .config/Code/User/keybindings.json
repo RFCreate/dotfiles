@@ -67,11 +67,6 @@
         "when": "!inSearchEditor && !searchViewletFocus"
     },
     {
-        "key": "ctrl+q",
-        "command": "workbench.action.terminal.kill",
-        "when": "terminalFocus"
-    },
-    {
         "key": "ctrl+[Backquote]",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "panelFocus"
