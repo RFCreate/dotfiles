@@ -343,7 +343,8 @@ def client_killed(client):
     if not hasattr(client, "group") or client.group is None:
         return
     group, screen = client.group, client.group.screen
-    if not screen or group.windows:
+    # Compare greater than one since window is still atached to group
+    if not screen or len(group.windows) > 1:
         return
     previous_group = screen.previous_group
     if previous_group and previous_group.windows:
