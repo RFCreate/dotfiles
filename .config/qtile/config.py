@@ -208,7 +208,14 @@ screens = [
                     this_screen_border="#ffdd66",
                     fontsize=24,
                 ),
-                widget.Spacer(),
+                widget.Sep(**sep_defaults),
+                widget.TaskList(
+                    border="#005577",
+                    highlight_method="block",
+                    theme_mode="fallback",
+                    unfocused_border="#444444",
+                    parse_text=lambda window_name: "",
+                ),
                 widget.Systray(padding=8),
                 widget.Sep(**sep_defaults),
                 widget.Volume(
@@ -251,19 +258,6 @@ screens = [
                 widget.CurrentLayout(draw_icon_first=True, scale=0.74),
             ],
             border_width=[0, 0, 1, 0],
-            **bar_defaults
-        ),
-        bottom=bar.Bar(
-            widgets=[
-                widget.TaskList(
-                    border="#005577",
-                    highlight_method="block",
-                    theme_mode="fallback",
-                    unfocused_border="#444444",
-                    font="sans",
-                ),
-            ],
-            border_width=[1, 0, 0, 0],
             **bar_defaults
         ),
     ),
