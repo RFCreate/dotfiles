@@ -177,23 +177,20 @@ layouts = [
 # Default values for all widgets
 widget_defaults = dict(
     font="monospace",
-    fontsize=16,
+    fontsize=18,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
 
 # Default values for bars and specific widgets
 bar_defaults = dict(
-    size=28,
+    size=32,
     background="#2b2b2b",
     border_color="#ffffff",
 )
-top_bar_sep = dict(
+sep_defaults = dict(
     foreground="#bbbbbb",
     padding=18,
-)
-top_bar_text = dict(
-    foreground="#ffdd66",
 )
 
 screens = [
@@ -209,50 +206,55 @@ screens = [
                     inactive="#888888",
                     this_current_screen_border="#ffdd66",
                     this_screen_border="#ffdd66",
-                    padding=4,
                     fontsize=24,
                 ),
                 widget.Spacer(),
                 widget.Systray(padding=8),
-                widget.Sep(**top_bar_sep),
-                widget.TextBox("VOL", **top_bar_text),
+                widget.Sep(**sep_defaults),
                 widget.Volume(
-                    unmute_format="󰕾 {volume}%",
-                    mute_format="󰝟 {volume}%",
+                    unmute_format="<big>󰕾</big> {volume}%",
+                    mute_format="<big>󰝟</big> {volume}%",
                     mute_foreground="#888888",
+                    foreground="#bbbbff",
                     volume_app="lxterminal -e pulsemixer",
                 ),
-                widget.Sep(**top_bar_sep),
-                widget.TextBox("CPU", **top_bar_text),
-                widget.CPU(format="{load_percent:.0f}%"),
-                widget.Sep(**top_bar_sep),
-                widget.TextBox("RAM", **top_bar_text),
-                widget.Memory(format="{MemPercent:.0f}%"),
-                widget.Sep(**top_bar_sep),
-                widget.TextBox("SWAP", **top_bar_text),
-                widget.Memory(format="{SwapPercent:.0f}%"),
-                widget.Sep(**top_bar_sep),
-                widget.TextBox("BAT", **top_bar_text),
+                widget.Sep(**sep_defaults),
+                widget.Memory(
+                    fmt="<big></big> {}",
+                    format="{MemPercent:.0f}% 󰪍 {SwapPercent:.0f}%",
+                    foreground="#ddbbdd",
+                ),
+                widget.Sep(**sep_defaults),
+                widget.CPU(
+                    fmt="<big></big> {}",
+                    format="{load_percent:.0f}%",
+                    foreground="#ffbbbb",
+                ),
+                widget.Sep(**sep_defaults),
                 widget.Battery(
+                    fmt="<big>󰁹</big> {}",
                     format="{percent:2.0%} {char}",
-                    full_char="󰁹",
+                    foreground="#99dd99",
+                    full_char="",
                     charge_char="󰁞",
                     discharge_char="󰁆",
                     empty_char="",
-                    low_percentage=0.25,
                     show_short_text=False,
                 ),
-                widget.Sep(**top_bar_sep),
-                widget.Clock(format="%d/%m/%Y %I:%M:%S %p", **top_bar_text),
+                widget.Sep(**sep_defaults),
+                widget.Clock(
+                    fmt="<big></big> {}",
+                    format="%H:%M:%S",
+                    foreground="#ffdd66",
+                ),
+                widget.Sep(**sep_defaults),
+                widget.CurrentLayout(draw_icon_first=True, scale=0.74),
             ],
             border_width=[0, 0, 1, 0],
             **bar_defaults
         ),
         bottom=bar.Bar(
             widgets=[
-                widget.CurrentLayoutIcon(scale=0.75),
-                widget.CurrentLayout(fmt="<u>{}</u>"),
-                widget.Sep(foreground="#ffffff", padding=10),
                 widget.TaskList(
                     border="#005577",
                     highlight_method="block",
