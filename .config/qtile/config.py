@@ -206,7 +206,7 @@ screens = [
                     inactive="#888888",
                     this_current_screen_border="#ffdd66",
                     this_screen_border="#ffdd66",
-                    fontsize=24,
+                    fontsize=26,
                 ),
                 widget.Sep(**sep_defaults),
                 widget.TaskList(
@@ -255,7 +255,7 @@ screens = [
                     foreground="#ffdd66",
                 ),
                 widget.Sep(**sep_defaults),
-                widget.CurrentLayout(draw_icon_first=True, scale=0.74),
+                widget.CurrentLayout(icon_first=True, scale=0.74),
             ],
             border_width=[0, 0, 1, 0],
             **bar_defaults
