@@ -255,7 +255,7 @@ screens = [
                     foreground="#ffdd66",
                 ),
                 widget.Sep(**sep_defaults),
-                widget.CurrentLayout(icon_first=True, scale=0.74),
+                widget.CurrentLayout(mode="icon", scale=0.75),
             ],
             border_width=[0, 0, 1, 0],
             **bar_defaults
