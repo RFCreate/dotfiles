@@ -28,7 +28,7 @@ FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" source_script /usr/share/fzf/key-bind
 
 shopt -s autocd         # Change directory automatically
 shopt -s dotglob        # Match all files including dotfiles
-shopt -s histappend     # Append to history, only takes effect when history exceeds HISTSIZE
+shopt -s histappend     # Append to history even when session history exceeds HISTSIZE
 
 bind 'set completion-ignore-case on'    # Insensitive completion
 bind 'set bell-style none'              # Remove beep
