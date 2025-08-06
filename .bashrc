@@ -26,8 +26,9 @@ source_script /usr/share/bash-completion/completions/git && __git_complete dotfi
 export FZF_DEFAULT_OPTS="--height 100% --layout=default --border"
 FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" source_script /usr/share/fzf/key-bindings.bash
 
-shopt -s autocd     # Change directory automatically
-shopt -s dotglob    # Match all files including dotfiles
+shopt -s autocd         # Change directory automatically
+shopt -s dotglob        # Match all files including dotfiles
+shopt -s histappend     # Append to history, only takes effect when history exceeds HISTSIZE
 
 bind 'set completion-ignore-case on'    # Insensitive completion
 bind 'set bell-style none'              # Remove beep
