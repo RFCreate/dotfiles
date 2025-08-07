@@ -25,8 +25,6 @@ source_script() {
 
 # Load aliases
 source_script "$HOME/.config/aliasrc"
-# Load env variables
-source_script "$HOME/.config/envrc"
 
 # Load zsh plugins
 source_script /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

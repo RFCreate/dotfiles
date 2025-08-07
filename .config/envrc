@@ -1,5 +1,5 @@
 # Add ~/.local/bin to PATH
-export PATH="${PATH}:${HOME}/.local/bin"
+export PATH="${PATH}:$HOME/.local/bin"
 
 # Set XDG variables
 export XDG_CACHE_HOME="$HOME/.cache"

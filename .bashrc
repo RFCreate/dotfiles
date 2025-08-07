@@ -18,10 +18,8 @@ source_script() {
 
 # Load aliases
 source_script "$HOME/.config/aliasrc"
-# Load env variables
-source_script "$HOME/.config/envrc"
 
-# Alias completion for dotfiles
+# dotfiles alias completion
 source_script /usr/share/bash-completion/completions/git && __git_complete dotfiles __git_main
 
 # Load fzf CTRL-R history search
