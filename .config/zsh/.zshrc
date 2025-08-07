@@ -34,9 +34,8 @@ source_script /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-su
 # Load custom prompt
 eval "$(starship init zsh)"
 
-# Load fzf CTRL-R history search
-export FZF_DEFAULT_OPTS="--height 100% --layout=default --border"
-FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" source_script /usr/share/fzf/key-bindings.zsh
+# Set up fzf CTRL-R history search and fuzzy completion
+FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" source <(fzf --zsh)
 
 # Set emacs keybindings
 bindkey -e

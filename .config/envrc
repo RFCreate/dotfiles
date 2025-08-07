@@ -22,3 +22,6 @@ export BAT_PAGER="less -R"
 export SYSTEMD_LESS="FRXMK"
 # Set pager for man command (syntax highlighting)
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+# Set fzf variables
+export FZF_DEFAULT_OPTS="--height 100% --layout=default --border"

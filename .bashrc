@@ -22,9 +22,8 @@ source_script "$HOME/.config/aliasrc"
 # dotfiles alias completion
 source_script /usr/share/bash-completion/completions/git && __git_complete dotfiles __git_main
 
-# Load fzf CTRL-R history search
-export FZF_DEFAULT_OPTS="--height 100% --layout=default --border"
-FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" source_script /usr/share/fzf/key-bindings.bash
+# Set up fzf CTRL-R history search and fuzzy completion
+FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" eval "$(fzf --bash)"
 
 shopt -s autocd         # Change directory automatically
 shopt -s dotglob        # Match all files including dotfiles
