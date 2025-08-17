@@ -19,9 +19,12 @@ source_script() {
 # Load aliases
 source_script "$HOME/.config/aliasrc"
 
-# dotfiles alias completion
-source_script /usr/share/bash-completion/completions/git && __git_complete g __git_main
-source_script /usr/share/bash-completion/completions/git && __git_complete dotfiles __git_main
+# Completion for git aliases
+source_script /usr/share/bash-completion/completions/git
+if type __git_complete &>/dev/null; then
+    __git_complete g __git_main
+    __git_complete dotfiles __git_main
+fi
 
 # Set up fzf CTRL-R history search and fuzzy completion
 FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" eval "$(fzf --bash)"
