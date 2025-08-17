@@ -20,6 +20,7 @@ source_script() {
 source_script "$HOME/.config/aliasrc"
 
 # dotfiles alias completion
+source_script /usr/share/bash-completion/completions/git && __git_complete g __git_main
 source_script /usr/share/bash-completion/completions/git && __git_complete dotfiles __git_main
 
 # Set up fzf CTRL-R history search and fuzzy completion

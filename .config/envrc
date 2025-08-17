@@ -1,14 +1,17 @@
 # Add ~/.local/bin to PATH
 export PATH="${PATH}:$HOME/.local/bin"
 
+# Set default editor
+export EDITOR="micro"
+
 # Set XDG variables
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# Set default editor
-export EDITOR="micro"
+# Set zsh dotfiles directory
+export "ZDOTDIR=$XDG_CONFIG_HOME/zsh"
 
 # Set history file of applications
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
