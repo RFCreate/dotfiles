@@ -9,6 +9,10 @@
 	a = add
 	aa = add --all
 	au = add --update
+	b = branch
+	bc = branch --create
+	bd = branch --delete
+	bm = branch --move
 	c = commit
 	ca = commit -a
 	cm = commit -m
