@@ -30,7 +30,7 @@ fi
 FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" eval "$(fzf --bash)"
 
 shopt -s autocd         # Change directory automatically
-shopt -s dotglob        # Match all files including dotfiles
+shopt -s dotglob        # Include files beginning with dot in expansion
 shopt -s histappend     # Append to history even when session history exceeds HISTSIZE
 
 bind 'set completion-ignore-case on'    # Insensitive completion

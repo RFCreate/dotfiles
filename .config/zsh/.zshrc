@@ -91,7 +91,7 @@ setopt autopushd            # Push old directory to the stack
 setopt pushdignoredups      # Ignore duplicates in the stack
 setopt pushdminus           # Use -n to specify a directory in the stack
 setopt alwaystoend          # Move cursor to the end after completion
-setopt globdots             # Match all files including dotfiles
+setopt globdots             # Include files beginning with dot in expansion
 setopt extendedhistory      # Save command with timestamp
 setopt histexpiredupsfirst  # Remove duplicates from history file when full
 setopt histfindnodups       # Do not show duplicates in history search
