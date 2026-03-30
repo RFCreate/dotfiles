@@ -30,5 +30,6 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.suggest.insertMode": "replace",
     "workbench.startupEditor": "none",
+    "workbench.colorTheme": "Dark Modern",
     "window.zoomLevel": 1
 }
