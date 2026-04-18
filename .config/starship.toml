@@ -77,6 +77,7 @@ symbol = ""
 format = "[  ](fg:gray bg:background)[($virtualenv )$symbol]($style)"
 style = "fg:yellow bg:background"
 detect_extensions = []
+generic_venv_names = [".venv", "venv"]
 
 [cmd_duration]
 format = "[  ](fg:gray bg:background)[$duration ]($style)"
