@@ -26,3 +26,6 @@ alias diff='diff --color=auto'
 alias -- -='cd -'
 alias -- ...='cd ../..'
 alias -- ....='cd ../../..'
+
+# Replace commands
+alias npm=pnpm
