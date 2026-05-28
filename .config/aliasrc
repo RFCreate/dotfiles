@@ -28,4 +28,5 @@ alias -- ...='cd ../..'
 alias -- ....='cd ../../..'
 
 # Replace commands
+alias sudo=doas
 alias npm=pnpm
