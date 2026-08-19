@@ -28,6 +28,7 @@
 	lg = log --oneline --decorate --graph
 	pl = pull
 	ps = push
+	psf = push --force-with-lease --force-if-includes
 	rmc = rm --cached
 	s = status
 	ss = status --short
