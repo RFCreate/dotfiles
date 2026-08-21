@@ -10,7 +10,7 @@
 	aa = add --all
 	au = add --update
 	b = branch
-	bc = branch --create
+	bc = branch --copy
 	bd = branch --delete
 	bm = branch --move
 	c = commit
@@ -32,6 +32,9 @@
 	rmc = rm --cached
 	s = status
 	ss = status --short
+	sw = switch
+	swc = switch --create
+	swd = switch --detach
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
