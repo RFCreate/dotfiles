@@ -33,6 +33,3 @@ nm-applet &
 
 # Start battery notifier
 battery-notify &
-
-# Activate numlock
-numlockx &
