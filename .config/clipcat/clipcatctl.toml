@@ -1,0 +1,5 @@
+[log]
+emit_journald = true
+emit_stdout = false
+emit_stderr = false
+level = "INFO"

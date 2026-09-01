@@ -23,7 +23,7 @@ xss-lock --transfer-sleep-lock -- i3lock -c 333333 --nofork &
 dunst &
 
 # Start clipboard manager
-greenclip daemon &
+clipcatd --no-daemon --replace &
 
 # Start colour temperature adjustment
 redshift &
