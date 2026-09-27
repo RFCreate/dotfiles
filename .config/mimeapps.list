@@ -13,6 +13,7 @@ image/jpg=imv-dir.desktop
 image/png=imv-dir.desktop
 image/svg+xml=imv-dir.desktop
 image/svg-xml=imv-dir.desktop
+image/webp=imv-dir.desktop
 inode/directory=pcmanfm.desktop
 inode/x-empty=micro.desktop
 text/csv=micro.desktop
