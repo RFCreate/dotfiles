@@ -37,6 +37,9 @@ eval "$(starship init zsh)"
 # Set up fzf CTRL-R history search and fuzzy completion
 FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" source <(fzf --zsh)
 
+# Replace cd with zoxide
+eval "$(zoxide init zsh --cmd cd)"
+
 # Set emacs keybindings
 bindkey -e
 # Load terminfo database

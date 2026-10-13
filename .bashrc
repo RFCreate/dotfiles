@@ -29,6 +29,9 @@ fi
 # Set up fzf CTRL-R history search and fuzzy completion
 FZF_CTRL_T_COMMAND="" FZF_ALT_C_COMMAND="" eval "$(fzf --bash)"
 
+# Replace cd with zoxide
+eval "$(zoxide init bash --cmd cd)"
+
 shopt -s autocd         # Change directory automatically
 shopt -s dotglob        # Include files beginning with dot in expansion
 shopt -s histappend     # Append to history even when session history exceeds HISTSIZE
