@@ -1,12 +1,19 @@
 #!/bin/sh
 
-WARNING_LEVEL=25
+WARNING_LEVEL=30
 CRITICAL_LEVEL=15
 
 # Get first battery occurance
-for battery_dir in /sys/class/power_supply/BAT?; do break; done
+battery_dir=""
+for candidate in /sys/class/power_supply/BAT*; do
+    if [ -d "$candidate" ]; then
+        battery_dir="$candidate"
+        break
+    fi
+done
+unset candidate
 # Exit if match is not found
-echo "$battery_dir" | grep -Fq "?" && exit 1
+[ -n "$battery_dir" ] || exit 1
 
 last_battery_status="Unknown"
 battery_status="Unknown"
@@ -16,7 +23,7 @@ last_icon=""
 icon=""
 
 # Get unique id for notification replacement
-notify_id="$(basename "$0" | sum | cut -d ' ' -f1)"
+notify_id="$$"
 
 # Send notification
 send_notification() {
@@ -62,12 +69,12 @@ get_urgency() {
 
 # Get battery capacity
 get_battery_capacity() {
-    battery_capacity="$(cat "$battery_dir/capacity")"
+    IFS= read -r battery_capacity < "$battery_dir/capacity"
 }
 
 # Get battery status
 get_battery_status() {
-    battery_status="$(cat "$battery_dir/status")"
+    IFS= read -r battery_status < "$battery_dir/status"
 }
 
 # Run script in the background
@@ -77,6 +84,7 @@ while true; do
     # Match battery status
     case "$battery_status" in
         "Full")
+            # Send notification if status has changed
             if is_diff_status; then
                 get_battery_capacity
                 icon="battery-full"
@@ -85,6 +93,7 @@ while true; do
             fi
             ;;
         "Charging")
+            # Send notification if status has changed
             if is_diff_status; then
                 get_battery_capacity
                 get_icon
@@ -94,6 +103,8 @@ while true; do
             fi
             ;;
         "Discharging")
+            # Send notification if icon has changed
+            # since discharging has multiple capacity levels
             get_battery_capacity
             get_icon
             if is_diff_icon; then
@@ -103,5 +114,5 @@ while true; do
             ;;
     esac
     # Wait interval
-    sleep 10
+    sleep 30
 done

@@ -2,17 +2,22 @@
 
 # Run command based on argument
 case "$1" in
-    "up") brightnessctl -q set +5% || exit 1 ;;
-    "down") brightnessctl -q set 5%- || exit 1 ;;
+    up) output="$(brightnessctl -m set +5%)" || exit 1 ;;
+    down) output="$(brightnessctl -m set 5%-)" || exit 1 ;;
+    *) output="$(brightnessctl -m)" || exit 1 ;;
 esac
 
 # Get brightness percent
-brightness="$(brightnessctl | grep -o '[0-9]*%')"
+brightness="${output%,*}"
+brightness="${brightness##*,}"
+brightness="${brightness%\%}"
+
 # Set notification icon
 icon="video-display"
 
 # Get unique id for notification replacement
-notify_id="$(basename "$0" | sum | cut -d ' ' -f1)"
+checksum="$(printf '%s' "${0##*/}" | sum)"
+notify_id="${checksum%% *}"
 
 # Send notification
-notify-send "Brightness: ${brightness}" -h int:value:"${brightness}" -i "${icon}" -r "${notify_id}" -t 2000 -u normal
+notify-send "Brightness: ${brightness}%" -h int:value:"${brightness}" -i "${icon}" -r "${notify_id}" -t 2000 -u normal

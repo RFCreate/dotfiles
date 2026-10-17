@@ -11,11 +11,19 @@ case "$1" in
 esac
 
 # Get audio information
-WPCTL="$(wpctl get-volume @DEFAULT_SINK@)"
+reading="$(wpctl get-volume @DEFAULT_SINK@)" || exit 1
+
 # Get volume value
-volume="$(echo "$WPCTL" | grep -o '[0-9]\.[0-9][0-9]' | sed 's/0*\.//')"
+level="${reading#Volume: }"
+level="${level%% *}"
+fraction="${level#*.}"
+volume=$((${level%.*} * 100 + ${fraction#0}))
+
 # Get mute state
-echo "$WPCTL" | grep -q 'MUTED' && mute=" (muted)"
+mute=""
+case "$reading" in
+    *MUTED*) mute=" (muted)" ;;
+esac
 
 # Set notification icon
 if [ -n "$mute" ]; then
@@ -31,7 +39,8 @@ else
 fi
 
 # Get unique id for notification replacement
-notify_id="$(basename "$0" | sum | cut -d ' ' -f1)"
+checksum="$(printf '%s' "${0##*/}" | sum)"
+notify_id="${checksum%% *}"
 
 # Send notification
 notify-send "Volume: ${volume}%${mute}" -h int:value:"${volume}" -i "${icon}" -r "${notify_id}" -t 2000 -u normal
